@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello page</title>
+    <link media="all" rel="stylesheet" th:href="@{/css/blocks.css}" type="text/css"/>
+    <link media="all" rel="stylesheet" th:href="@{/css/buttons.css}" type="text/css"/>
+    <link media="all" rel="stylesheet" th:href="@{/css/page-titles.css}" type="text/css"/>
+    <link media="all" rel="stylesheet" th:href="@{/css/images.css}" type="text/css"/>
+</head>
+
+<body>
+
+<div th:class="blockMain">
+    <div th:class="blockOne">
+
+        <form th:class="enter" th:method="GET" th:action="@{/auth/login}">
+            <input th:class="buttonEnter" type="submit" value="Вход">
+        </form>
+
+        <form th:class="registration" th:method="GET" th:action="@{/auth/registration}">
+            <input th:class="buttonRegistration" type="submit" value="Регистрация">
+        </form>
+
+    </div>
+
+    <div th:class="blockTwoAndThree">
+        <img th:class="hello-library" src="/images/hello-library.jpg" alt="Library">
+        <h3 th:class="pageTitleHello">Уважаемый пользователь!</h3><br/>
+        <span>Данный сайт создан для того, чтобы была возможность найти нужную книгу из списка имеющихся,
+            а не ехать в библиотеку наобум. Найденную книгу можно забронировать, и, как следствие, быть
+            уверенным, что её никто не заберёт до вас!</span>
+    </div>
+
+</div>
+
+</body>
+</html>
+
+<!--<div th:class="blockMain">-->
+<!--    -->
+<!--    <div th:class="blockOne">-->
+<!--        -->
+<!--    </div>-->
+<!--    -->
+<!--    <div th:class="blockTwo">-->
+<!--        -->
+<!--    </div>-->
+<!--    -->
+<!--    <div th:class="blockThree">-->
+<!--        -->
+<!--    </div>-->
+<!--    -->
+<!--</div>-->

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список всех людей</title>
+    <link media="all" rel="stylesheet" th:href="@{/css/blocks.css}" type="text/css"/>
+    <link media="all" rel="stylesheet" th:href="@{/css/buttons.css}" type="text/css"/>
+    <link media="all" rel="stylesheet" th:href="@{/css/page-titles.css}" type="text/css"/>
+    <link media="all" rel="stylesheet" th:href="@{/css/scrollable-list.css}" type="text/css"/>
+</head>
+<body>
+
+<div th:class="blockMain">
+
+    <div th:class="blockOne">
+        <form th:action="@{/logout}" th:method="POST">
+            <input th:class="buttonExit" type="submit" value="Выход">
+        </form>
+        <form th:method="GET" th:action="@{/user/showAccount}">
+            <input th:class="buttonBackToBooks" type="submit" value="Вернуться в личный кабинет">
+        </form>
+    </div>
+
+    <div th:class="blockTwo">
+        <form th:method="GET" th:action="@{/books}">
+            <input th:class="buttonNavi" type="submit" value="Перейти к списку книг">
+        </form>
+    </div>
+
+    <div th:class="blockThree">
+        <h2 th:class="pageTitle">Список зарегистрированных пользователей</h2>
+        <!--/*@thymesVar id="people" type="com.itbatia.app.dto.PersonDTO"*/-->
+        <div th:class="scrollableList">
+            <div th:each="person : ${people}">
+                <a th:href="@{/people/{id}(id=${person.getId()})}"
+                   th:text="${person.getFullName()}">user</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

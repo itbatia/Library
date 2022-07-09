@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Информация о пользователе</title>
+    <link media="all" rel="stylesheet" th:href="@{/css/blocks.css}" type="text/css"/>
+    <link media="all" rel="stylesheet" th:href="@{/css/buttons.css}" type="text/css"/>
+    <link media="all" rel="stylesheet" th:href="@{/css/page-titles.css}" type="text/css"/>
+    <link media="all" rel="stylesheet" th:href="@{/css/scrollable-list.css}" type="text/css"/>
+</head>
+<body>
+
+<div th:class="blockMain">
+
+    <div th:class="blockOne">
+        <form th:method="GET" th:action="@{/people}">
+            <input th:class="buttonBackToPeople" type="submit" value="Вернуться к списку пользователей">
+        </form>
+    </div>
+
+    <div th:class="blockTwo">
+        <form th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"
+              th:method="GET" th:action="@{/people/{id}/edit(id=${person.getId()})}">
+            <input th:class="buttonNavi" type="submit" value="Изменить данные пользователя">
+        </form>
+        <form th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"
+              th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
+            <input th:class="buttonNavi" onclick="return confirm('Вы уверены, что хотите удалить пользователя?')"
+                   type="submit" value="Удалить пользователя">
+        </form>
+    </div>
+
+    <div th:class="blockThree">
+        <h2 th:class="pageTitle">Информация о пользователе</h2>
+
+        <!--/*@thymesVar id="person" type="com.itbatia.app.dto.PersonDTO"*/-->
+        <span th:text="'Имя : ' + ${person.getFullName()}">VALUE</span><br/>
+        <span th:text="'Год рождения: ' + ${person.getYearOfBirth()}">VALUE</span><br/>
+        <span th:text="'Возможность бронировать книги на сайте: ' + ${person.getBooking()}">VALUE</span><br/>
+        <span th:text="'Дата создания аккаунта: ' + ${person.getCreatedAt()}">VALUE</span>
+        <br/>
+        <!--        <span style="color: #2970a9">Имя : </span>-->
+        <!--        <span th:text="${person.getFullName()}">VALUE</span><br/>-->
+        <!--        <span style="color: #2970a9">Год рождения: </span>-->
+        <!--        <span th:text="${person.getYearOfBirth()}">VALUE</span><br/>-->
+        <!--        <span style="color: #2970a9">Возможность бронировать книги на сайте: </span>-->
+        <!--        <span th:text="${person.getBooking()}">VALUE</span><br/>-->
+        <!--        <span style="color: #2970a9">Дата создания аккаунта: </span>-->
+        <!--        <span th:text="${person.getCreatedAt()}">VALUE</span><br/>-->
+
+        <div th:if="${books.isEmpty()}">
+            <p style="color: blueviolet">Человек пока не взял ни одной книги</p>
+        </div>
+
+        <!--/*@thymesVar id="books" type="com.itbatia.app.dto.BookDTO"*/-->
+        <div th:if="${!books.isEmpty()}">
+
+            <hr/>
+
+            <div th:class="scrollableForShowPerson">
+
+                <table th:each="book : ${books}">
+
+                    <tr th:style="${book.isTimeExpired()} ? 'color: red' : 'color: blueviolet' "
+                        th:if="${book.getTakenAt()!=null}">
+                        <td>Книга взята на руки <span th:text="${book.getTakenAt()}">Value</span></td>
+                        <td>
+                <span th:style="${book.isTimeExpired()} ? 'color: red' : 'color: black' "
+                      th:text="${book.getTitle() + ', ' + book.getAuthor() + ', ' + book.getGenre().getGenreTitle()}">book
+                </span>
+                        </td>
+                    </tr>
+
+                    <tr th:if="${book.getReservedUntil()!=null}">
+                        <td style="color:limegreen">Книга забронирована до</td>
+                        <td style="color:limegreen" th:text="${reserveTime.get(book.getId())}">ReservedUntil</td>
+                        <td>
+                            <span th:text="${book.getTitle() + ', ' + book.getAuthor() + ', ' + book.getGenre().getGenreTitle()}">book</span>
+                        </td>
+                    </tr>
+
+                </table>
+
+            </div>
+            <hr/>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

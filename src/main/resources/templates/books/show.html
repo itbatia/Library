@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Информация о книге</title>
+    <link media="all" rel="stylesheet" th:href="@{/css/blocks.css}" type="text/css"/>
+    <link media="all" rel="stylesheet" th:href="@{/css/buttons.css}" type="text/css"/>
+    <link media="all" rel="stylesheet" th:href="@{/css/page-titles.css}" type="text/css"/>
+</head>
+<body>
+
+<div th:class="blockMain">
+
+    <div th:class="blockOne">
+        <form th:action="@{/logout}" th:method="POST">
+            <input th:class="buttonExit" type="submit" value="Выход">
+        </form>
+        <form th:method="GET" th:action="@{/books}">
+            <input th:class="buttonBackToBooks" type="submit" value="Вернуться к списку всех книг">
+        </form>
+    </div>
+
+    <div th:class="blockTwo">
+        <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') or hasRole(''ROLE_LIBRARIAN'')')}">
+            <form th:method="GET" th:action="@{/books/{id}/edit(id=${book.getId()})}">
+                <input th:class="buttonNavi" type="submit" value="Редактировать книгу">
+            </form>
+
+            <form th:method="DELETE" th:action="@{/books/{id}(id=${book.getId()})}">
+                <input th:class="buttonNavi" type="submit"
+                       onclick="return confirm('Вы уверены, что хотите удалить книгу?')" value="Удалить книгу">
+            </form>
+        </div>
+
+    </div>
+
+    <div th:class="blockThree">
+        <h2 th:class="pageTitle">Информация о книге</h2>
+
+        <!--/*@thymesVar id="book" type="com.itbatia.app.dto.BookDTO"*/-->
+        <span th:text="'Название : ' + ${book.getTitle()}">Title</span><br/>
+        <span th:text="'Автор: ' + ${book.getAuthor()}">Author</span><br/>
+        <span th:text="'Жанр: ' + ${book.getGenre().getGenreTitle()}">Genre</span><br/><br/>
+
+        <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') or hasRole(''ROLE_LIBRARIAN'')')}">
+
+            <!--/*@thymesVar id="owner" type="com.itbatia.app.dto.PersonDTO"*/-->
+            <div th:if="${owner}">
+
+                <div th:if="${book.getTakenAt()!=null}">
+                    <span style="color:blueviolet">Книга на руках у: </span>
+                    <span th:text="${owner.getFullName()}">Owner's fullName</span>
+                    <span style="color:blueviolet">от </span>
+                    <span style="color:blueviolet" th:text="${book.getTakenAt()}">VALUE</span>
+                    <br>
+
+                    <form th:method="PATCH" th:action="@{/books/{id}/release(id=${book.getId()})}">
+                        <input th:class="buttonReleaseBook" type="submit" value="Освободить книгу"/>
+                    </form>
+                </div>
+
+                <div th:if="${book.getReservedUntil()!=null}">
+                    <span style="color:blueviolet">Книга забронирована пользователем </span>
+                    <span th:text="${owner.getFullName()}">Owner's fullName</span>
+                    <span style="color:blueviolet">до </span>
+                    <span style="color:blueviolet" th:text="${reserveTime}">VALUE</span>
+
+                    <form th:method="PATCH" th:action="@{/books/{id}/removeReserve(id=${book.getId()})}">
+                        <input th:class="buttonNavi" type="submit" value="Снять бронь"/>
+                    </form>
+                </div>
+
+            </div>
+
+            <!--/*@thymesVar id="people" type="com.itbatia.app.dto.PersonDTO"*/-->
+            <div th:if="${people}" style="color:blueviolet">
+                <span>Эта книга свободна. Кому назначить ее?</span>
+                <form th:method="PATCH" th:action="@{/books/{id}/assign(id=${book.getId()})}">
+                    <label for="person">Выберите человека</label>
+                    <select th:object="${person}" th:field="*{id}" id="person">
+                        <option th:each="person : ${people}" th:value="${person.getId()}"
+                                th:text="${person.getFullName()}">
+                        </option>
+                    </select>
+                    <br>
+                    <input th:class="buttonAssignBook" type="submit" value="Назначить книгу"/>
+                </form>
+            </div>
+
+        </div>
+
+        <div th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+
+            <div style="color:blueviolet" th:if="${book.getTakenAt()!=null}"><span>Книга на руках</span></div>
+
+            <div style="color:blueviolet" th:if="${book.getReservedUntil()!=null}">
+                <div th:if="${currentUser==null}"><span>Книга уже забронирована</span></div>
+                <div style="color:limegreen" th:if="${currentUser}">
+                    <span>Эта книга забронирована вами до </span>
+                    <span th:text="${reserveTime}">VALUE</span>
+                    <form th:method="PATCH" th:action="@{/books/{id}/removeReserve(id=${book.getId()})}">
+                        <input th:class="buttonRelease" type="submit" value="Снять бронь">
+                    </form>
+                </div>
+            </div>
+
+            <!--/*@thymesVar id="people" type="com.itbatia.app.dto.PersonDTO"*/-->
+            <div th:if="${book.getOwner()==null}">
+                <span style="color:blueviolet">Книга свободна</span>
+                <p th:if="!${currentUser.getBooking()}" style="color: red">
+                    К сожалению вы не можете забронировать эту книгу.<br>Для восстановления функции
+                    бронирования книг на сайте<br>обратитесь к администратору в библиотеке.
+                </p>
+
+                <!--/*@thymesVar id="currentUser" type="com.itbatia.app.dto.PersonDTO"*/-->
+                <form th:if="${currentUser.getBooking()}" th:method="PATCH"
+                      th:action="@{/books/{id}/reservation(id=${book.getId()})}">
+                    <input th:class="buttonBooking" type="submit" value="Забронировать">
+                </form>
+
+                <p th:if="${book.getOwner()==null && currentUser.getBooking()}" style="color: red">
+                    Важно!<br>Книга бронируется только на сутки! Если в течении этого времени вы
+                    <br>не сможете забрать её из библиотеки, то обязательно снимите бронь!
+                    <br>Иначе вы потеряете возможность бронировать книги на сайте!
+                </p>
+
+            </div>
+
+        </div>
+        <br/>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+.scrollableList {
+    overflow: auto; /* Добавляем полосы прокрутки только при необходимости */
+    width: 790px; /* Ширина блока */
+    height: 455px; /* Высота блока */
+    padding: 5px; /* Поля вокруг текста */
+}
+.scrollableForReg {
+    overflow: auto; /* Добавляем полосы прокрутки только при необходимости */
+    height: 420px; /* Высота блока */
+    padding: 5px; /* Поля вокруг текста */
+}
+.scrollableForEdit {
+    overflow: auto; /* Добавляем полосы прокрутки только при необходимости */
+    height: 425px; /* Высота блока */
+    padding: 5px; /* Поля вокруг текста */
+}
+.scrollableForNewBook {
+    overflow: auto; /* Добавляем полосы прокрутки только при необходимости */
+    height: 290px; /* Высота блока */
+    padding: 5px; /* Поля вокруг текста */
+}
+.scrollableForShowPerson {
+    overflow: auto; /* Добавляем полосы прокрутки только при необходимости */
+    width: 790px; /* Ширина блока */
+    height: 358px; /* Высота блока */
+    padding: 5px; /* Поля вокруг текста */
+}
+.scrollableForEditPerson {
+    overflow: auto; /* Добавляем полосы прокрутки только при необходимости */
+    height: 270px; /* Высота блока */
+    padding: 5px; /* Поля вокруг текста */
+}

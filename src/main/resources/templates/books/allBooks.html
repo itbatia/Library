@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список всех книг</title>
+    <link media="all" rel="stylesheet" th:href="@{/css/blocks.css}" type="text/css"/>
+    <link media="all" rel="stylesheet" th:href="@{/css/buttons.css}" type="text/css"/>
+    <link media="all" rel="stylesheet" th:href="@{/css/page-titles.css}" type="text/css"/>
+    <link media="all" rel="stylesheet" th:href="@{/css/scrollable-list.css}" type="text/css"/>
+    <link media="all" rel="stylesheet" th:href="@{/css/select.css}" type="text/css"/>
+</head>
+<body>
+
+<div th:class="blockMain">
+
+    <div th:class="blockOne">
+        <form th:action="@{/logout}" th:method="POST">
+            <input th:class="buttonExit" type="submit" value="Выход">
+        </form>
+
+        <form th:method="GET" th:action="@{/user/showAccount}">
+            <input th:class="buttonBackToBooks" type="submit" value="Вернуться в личный кабинет">
+        </form>
+    </div>
+
+    <div th:class="blockTwo">
+        <div th:class="select">
+
+            <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') or hasRole(''ROLE_LIBRARIAN'')')}">
+                <form th:method="GET" th:action="@{/books/new}">
+                    <input th:class="buttonNavi" type="submit" value="Добавить новую книгу">
+                </form>
+            </div>
+
+            <form th:method="GET" th:action="@{/books/search}">
+                <input th:class="buttonNavi" type="submit" value="Поиск книг">
+            </form>
+
+            <hr/>
+            <form th:method="GET" th:action="@{/books}">
+
+                <label for="sorter">1. Сортировать книги по: </label>
+                <select id="sorter" name="sorter" text="text">
+                    <option value="no" th:text="--"/>
+                    <option value="title" th:text="названию"/>
+                    <option value="author" th:text="автору"/>
+                    <option value="genre" th:text="жанру"/>
+                </select>
+                <br/><br/>
+
+                <label for="size">2. Количество книг на одной странице: </label>
+                <input id="size" name="size" type="number" min="1" max="1000">
+                <br/>
+                <label for="page">2. Показать страницу №: </label>
+                <input id="page" name="page" type="number" min="1" max="100">
+                <br/> <br/>
+                <input th:class="buttonNavi" type="submit" value="Искать">
+                <hr/>
+
+            </form>
+
+            <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') or hasRole(''ROLE_LIBRARIAN'')')}">
+                <form th:method="GET" th:action="@{/people}">
+                    <input th:class="buttonNavi" type="submit" value="Перейти к списку пользователей">
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <div th:class="blockThree">
+        <h2 th:class="pageTitle">Список всех книг в библиотеке</h2>
+
+        <div th:class="scrollableList">
+            <!--/*@thymesVar id="books" type="com.itbatia.app.dto.BookDTO"*/-->
+            <div th:each="book : ${books}">
+                <a th:href="@{/books/{id}(id=${book.getId()})}"
+                   th:text="${book.getTitle() + ', ' + book.getAuthor() + ', ' + book.getGenre().getGenreTitle()}">book</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
+
+<!--    &lt;!&ndash;/*@thymesVar id="books" type="com.itbatia.app.dto.BookDTO"*/&ndash;&gt;-->
+<!--    <div th:each="book : ${books}">-->
+<!--        <a th:href="@{/books/{id}(id=${book.getId()})}"-->
+<!--           th:text="${book.getTitle() + ', ' + book.getAuthor() + ', ' + book.getGenre().getGenreTitle()}">book</a>-->
+<!--    </div>-->
+<!--    <br/>-->
+
+<!--    <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') or hasRole(''ROLE_LIBRARIAN'')')}">-->
+<!--        <form th:method="GET" th:action="@{/books/new}">-->
+<!--            <input type="submit" value="Добавить новую книгу">-->
+<!--        </form>-->
+<!--        <hr/>-->
+<!--    </div>-->
+
+<!--    <form th:method="GET" th:action="@{/books}">-->
+
+<!--        <label for="sorter">1. Сортировать книги по: </label>-->
+<!--        <select id="sorter" name="sorter" text="text">-->
+<!--            <option value="no" th:text="&#45;&#45;"/>-->
+<!--            <option value="title" th:text="названию"/>-->
+<!--            <option value="author" th:text="автору"/>-->
+<!--            <option value="genre" th:text="жанру"/>-->
+<!--        </select>-->
+<!--        <br/><br/>-->
+
+<!--        <label for="size">2. Количество книг на одной странице: </label>-->
+<!--        <input id="size" name="size" type="number">-->
+<!--        <br/>-->
+
+<!--        <label for="page">2. Показать страницу №: </label>-->
+<!--        <input id="page" name="page" type="number">-->
+<!--        <br/>-->
+
+<!--        <input type="submit" value="Искать">-->
+<!--        <hr/>-->
+
+<!--    </form>-->
+<!--    <br/>-->
+
+
+<!--    <form th:method="GET" th:action="@{/books/search}">-->
+<!--        <input type="submit" value="Поиск книг">-->
+<!--    </form>-->
+<!--    <br/>-->
+
+<!--    <form th:method="GET" th:action="@{/user/showAccount}">-->
+<!--        <input type="submit" value="Вернуться в личный кабинет">-->
+<!--    </form>-->

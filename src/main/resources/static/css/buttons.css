@@ -1,0 +1,447 @@
+/**********  These are original 2 buttons:  **********/
+
+/*a.registration {*/
+/*    display: inline-block;*/
+/*    width: 15em;*/
+/*    font-size: 80%;*/
+/*    color: rgba(255,255,255,.9);*/
+/*    text-shadow: #2e7ebd 0 1px 2px;*/
+/*    text-decoration: none;*/
+/*    text-align: center;*/
+/*    line-height: 1.1;*/
+/*    white-space: pre-line;*/
+/*    padding: .7em 0;*/
+/*    border: 1px solid;*/
+/*    border-color: #60a3d8 #2970a9 #2970a9 #60a3d8;*/
+/*    border-radius: 6px;*/
+/*    outline: none;*/
+/*    background: #60a3d8 linear-gradient(#89bbe2, #60a3d8 50%, #378bce);*/
+/*    box-shadow: inset rgba(255,255,255,.5) 1px 1px;*/
+/*}*/
+/*a.registration:first-line{*/
+/*    font-size: 170%;*/
+/*    font-weight: 700;*/
+/*}*/
+/*a.registration:hover {*/
+/*    color: rgb(255,255,255);*/
+/*    background-image: linear-gradient(#9dc7e7, #74afdd 50%, #378bce);*/
+/*}*/
+/*a.registration:active {*/
+/*    color: rgb(255,255,255);*/
+/*    border-color: #2970a9;*/
+/*    background-image: linear-gradient(#5796c8, #6aa2ce);*/
+/*    box-shadow: none;*/
+/*}*/
+
+/*a.enter {*/
+/*    display: inline-block;*/
+/*    color: white;*/
+/*    font-weight: 700;*/
+/*    text-decoration: none;*/
+/*    user-select: none;*/
+/*    padding: .5em 2em;*/
+/*    outline: none;*/
+/*    border: 2px solid;*/
+/*    !*border-radius: 1px;*!*/
+/*    border-radius: 4px;*/
+/*    transition: 0.2s;*/
+/*}*/
+/*a.enter:hover { background: rgba(255,255,255,.2); }*/
+/*a.enter:active { background: white; }*/
+
+input.buttonEnter {
+    display: inline-block;
+    width: 6em;
+    font-size: 80%;
+    color: rgba(255, 255, 255, .9);
+    text-shadow: #2e7ebd 0 1px 2px;
+    text-decoration: none;
+    text-align: center;
+    line-height: 1.1;
+    white-space: pre-line;
+    padding: .7em 0;
+    border: 1px solid;
+    border-color: white;
+    border-radius: 6px;
+    outline: none;
+    background: transparent;
+    box-shadow: inset rgba(255, 255, 255, .5) 1px 1px;
+}
+input.buttonEnter:first-line {
+    font-size: 150%;
+    font-weight: 700;
+}
+input.buttonEnter:hover {
+    color: rgb(255, 255, 255);
+    background-image: linear-gradient(#9dc7e7, #74afdd 50%, #378bce);
+}
+input.buttonEnter:active {
+    color: rgb(255, 255, 255);
+    border-color: #2970a9;
+    background-image: linear-gradient(#5796c8, #6aa2ce);
+    box-shadow: none;
+}
+.buttonEnter {
+    float: right;
+}
+
+
+input.buttonExit {
+    display: inline-block;
+    width: 7em;
+    font-size: 80%;
+    color: rgba(255, 255, 255, .9);
+    text-shadow: #2e7ebd 0 1px 2px;
+    text-decoration: none;
+    text-align: center;
+    line-height: 1.1;
+    white-space: pre-line;
+    padding: .7em 0;
+    border: 1px solid;
+    border-color: white;
+    border-radius: 6px;
+    outline: none;
+    background: transparent;
+    box-shadow: inset rgba(255, 255, 255, .5) 1px 1px;
+}
+input.buttonExit:first-line {
+    font-size: 150%;
+    font-weight: 700;
+}
+input.buttonExit:hover {
+    color: rgb(255, 255, 255);
+    background-image: linear-gradient(#9dc7e7, #74afdd 50%, #378bce);
+}
+input.buttonExit:active {
+    color: rgb(255, 255, 255);
+    border-color: #2970a9;
+    background-image: linear-gradient(#5796c8, #6aa2ce);
+    box-shadow: none;
+}
+.buttonExit {
+    float: right;
+}
+
+
+input.buttonBack {
+    display: inline-block;
+    width: 7em;
+    font-size: 80%;
+    color: rgba(255, 255, 255, .9);
+    text-shadow: #2e7ebd 0 1px 2px;
+    text-decoration: none;
+    text-align: center;
+    line-height: 1.1;
+    white-space: pre-line;
+    padding: .7em 0;
+    border: 1px solid;
+    border-color: white;
+    border-radius: 6px;
+    outline: none;
+    background: transparent;
+    box-shadow: inset rgba(255, 255, 255, .5) 1px 1px;
+}
+input.buttonBack:first-line {
+    font-size: 150%;
+    font-weight: 700;
+}
+input.buttonBack:hover {
+    color: rgb(255, 255, 255);
+    background-image: linear-gradient(#9dc7e7, #74afdd 50%, #378bce);
+}
+input.buttonBack:active {
+    color: rgb(255, 255, 255);
+    border-color: #2970a9;
+    background-image: linear-gradient(#5796c8, #6aa2ce);
+    box-shadow: none;
+}
+.buttonBack {
+    float: left;
+}
+
+
+input.buttonRegistration {
+    display: inline-block;
+    width: 12em;
+    font-size: 80%;
+    color: rgba(255, 255, 255, .9);
+    text-shadow: #2e7ebd 0 1px 2px;
+    text-decoration: none;
+    text-align: center;
+    line-height: 1.1;
+    white-space: pre-line;
+    padding: .7em 0;
+    border: 1px solid;
+    border-color: white;
+    border-radius: 6px;
+    outline: none;
+    background: transparent;
+    box-shadow: inset rgba(255, 255, 255, .5) 1px 1px;
+}
+input.buttonRegistration:first-line {
+    font-size: 150%;
+    font-weight: 700;
+}
+input.buttonRegistration:hover {
+    color: rgb(255, 255, 255);
+    background-image: linear-gradient(#9dc7e7, #74afdd 50%, #378bce);
+}
+input.buttonRegistration:active {
+    color: rgb(255, 255, 255);
+    border-color: #2970a9;
+    background-image: linear-gradient(#5796c8, #6aa2ce);
+    box-shadow: none;
+}
+.buttonRegistration {
+    float: top;
+}
+
+
+input.buttonNavi {
+    display: inline-block;
+    width: 17.8em;
+    font-size: 80%;
+    color: rgba(255, 255, 255, .9);
+    text-shadow: #2e7ebd 0 1px 2px;
+    text-decoration: none;
+    text-align: center;
+    line-height: 1.1;
+    white-space: pre-line;
+    padding: .7em 0;
+    border: 1px solid;
+    border-color: #60a3d8 #2970a9 #2970a9 #60a3d8;
+    border-radius: 6px;
+    outline: none;
+    background: #60a3d8 linear-gradient(#89bbe2, #60a3d8 50%, #378bce);
+    box-shadow: inset rgba(255, 255, 255, .5) 1px 1px;
+}
+input.buttonNavi:first-line {
+    font-size: 150%;
+    font-weight: 700;
+}
+input.buttonNavi:hover {
+    color: rgb(255, 255, 255);
+    background-image: linear-gradient(#9dc7e7, #74afdd 50%, #378bce);
+}
+input.buttonNavi:active {
+    color: rgb(255, 255, 255);
+    border-color: #2970a9;
+    background-image: linear-gradient(#5796c8, #6aa2ce);
+    box-shadow: none;
+}
+.buttonNavi {
+    margin-bottom: 5px;
+}
+
+
+input.buttonBackToBooks {
+    display: inline-block;
+    width: 24em;
+    font-size: 80%;
+    color: rgba(255, 255, 255, .9);
+    text-shadow: #2e7ebd 0 1px 2px;
+    text-decoration: none;
+    text-align: center;
+    line-height: 1.1;
+    white-space: pre-line;
+    padding: .7em 0;
+    border: 1px solid;
+    border-color: white;
+    border-radius: 6px;
+    outline: none;
+    background: transparent;
+    box-shadow: inset rgba(255, 255, 255, .5) 1px 1px;
+}
+input.buttonBackToBooks:first-line {
+    font-size: 150%;
+    font-weight: 700;
+}
+input.buttonBackToBooks:hover {
+    color: rgb(255, 255, 255);
+    background-image: linear-gradient(#9dc7e7, #74afdd 50%, #378bce);
+}
+input.buttonBackToBooks:active {
+    color: rgb(255, 255, 255);
+    border-color: #2970a9;
+    background-image: linear-gradient(#5796c8, #6aa2ce);
+    box-shadow: none;
+}
+.buttonBackToBooks {
+    float: left;
+}
+
+
+input.buttonBackToPeople {
+    display: inline-block;
+    width: 29em;
+    font-size: 80%;
+    color: rgba(255, 255, 255, .9);
+    text-shadow: #2e7ebd 0 1px 2px;
+    text-decoration: none;
+    text-align: center;
+    line-height: 1.1;
+    white-space: pre-line;
+    padding: .7em 0;
+    border: 1px solid;
+    border-color: white;
+    border-radius: 6px;
+    outline: none;
+    background: transparent;
+    box-shadow: inset rgba(255, 255, 255, .5) 1px 1px;
+}
+input.buttonBackToPeople:first-line {
+    font-size: 150%;
+    font-weight: 700;
+}
+input.buttonBackToPeople:hover {
+    color: rgb(255, 255, 255);
+    background-image: linear-gradient(#9dc7e7, #74afdd 50%, #378bce);
+}
+input.buttonBackToPeople:active {
+    color: rgb(255, 255, 255);
+    border-color: #2970a9;
+    background-image: linear-gradient(#5796c8, #6aa2ce);
+    box-shadow: none;
+}
+.buttonBackToPeople {
+    float: left;
+}
+
+
+input.buttonRelease {
+    display: inline-block;
+    width: 12em;
+    font-size: 80%;
+    color: rgba(255, 255, 255, .9);
+    text-shadow: #2e7ebd 0 1px 2px;
+    text-decoration: none;
+    text-align: center;
+    line-height: 1.1;
+    white-space: pre-line;
+    padding: .7em 0;
+    border: 1px solid;
+    border-color: #60a3d8 #2970a9 #2970a9 #60a3d8;
+    border-radius: 6px;
+    outline: none;
+    background: #60a3d8 linear-gradient(#89bbe2, #60a3d8 50%, #378bce);
+    box-shadow: inset rgba(255, 255, 255, .5) 1px 1px;
+}
+input.buttonRelease:first-line {
+    font-size: 150%;
+    font-weight: 700;
+}
+input.buttonRelease:hover {
+    color: rgb(255, 255, 255);
+    background-image: linear-gradient(#9dc7e7, #74afdd 50%, #378bce);
+}
+input.buttonRelease:active {
+    color: rgb(255, 255, 255);
+    border-color: #2970a9;
+    background-image: linear-gradient(#5796c8, #6aa2ce);
+    box-shadow: none;
+}
+
+
+input.buttonReleaseBook {
+    display: inline-block;
+    width: 16em;
+    font-size: 80%;
+    color: rgba(255, 255, 255, .9);
+    text-shadow: #2ebd4b 0 1px 2px;
+    text-decoration: none;
+    text-align: center;
+    line-height: 1.1;
+    white-space: pre-line;
+    padding: .7em 0;
+    border: 1px solid;
+    border-color: #5cea9a #3ad95a #3ad95a #5cea9a;
+    border-radius: 6px;
+    outline: none;
+
+    background: #60d88a linear-gradient(#89e2a8, #60d886 50%, #37ce62);
+    box-shadow: inset rgba(255, 255, 255, .5) 1px 1px;
+}
+input.buttonReleaseBook:first-line {
+    font-size: 150%;
+    font-weight: 700;
+}
+input.buttonReleaseBook:hover {
+    color: rgb(255, 255, 255);
+    background-image: linear-gradient(#9de7a9, #74dd99 50%, #37ce62);
+}
+input.buttonReleaseBook:active {
+    color: rgb(255, 255, 255);
+    border-color: #5cd93a;
+    background-image: linear-gradient(#56e36d, #6ace9c);
+    box-shadow: none;
+}
+
+
+input.buttonAssignBook {
+    display: inline-block;
+    width: 15em;
+    font-size: 80%;
+    color: rgba(255, 255, 255, .9);
+    text-shadow: #2ebd4b 0 1px 2px;
+    text-decoration: none;
+    text-align: center;
+    line-height: 1.1;
+    white-space: pre-line;
+    padding: .7em 0;
+    border: 1px solid;
+    border-color: #5cea9a #3ad95a #3ad95a #5cea9a;
+    border-radius: 6px;
+    outline: none;
+
+    background: #60d88a linear-gradient(#89e2a8, #60d886 50%, #37ce62);
+    box-shadow: inset rgba(255, 255, 255, .5) 1px 1px;
+}
+input.buttonAssignBook:first-line {
+    font-size: 150%;
+    font-weight: 700;
+}
+input.buttonAssignBook:hover {
+    color: rgb(255, 255, 255);
+    background-image: linear-gradient(#9de7a9, #74dd99 50%, #37ce62);
+}
+input.buttonAssignBook:active {
+    color: rgb(255, 255, 255);
+    border-color: #5cd93a;
+    background-image: linear-gradient(#56e36d, #6ace9c);
+    box-shadow: none;
+}
+
+
+input.buttonBooking {
+    display: inline-block;
+    width: 14em;
+    font-size: 80%;
+    color: rgba(255, 255, 255, .9);
+    text-shadow: #2ebd4b 0 1px 2px;
+    text-decoration: none;
+    text-align: center;
+    line-height: 1.1;
+    white-space: pre-line;
+    padding: .7em 0;
+    border: 1px solid;
+    border-color: #5cea9a #3ad95a #3ad95a #5cea9a;
+    border-radius: 6px;
+    outline: none;
+
+    background: #60d88a linear-gradient(#89e2a8, #60d886 50%, #37ce62);
+    box-shadow: inset rgba(255, 255, 255, .5) 1px 1px;
+}
+input.buttonBooking:first-line {
+    font-size: 150%;
+    font-weight: 700;
+}
+input.buttonBooking:hover {
+    color: rgb(255, 255, 255);
+    background-image: linear-gradient(#9de7a9, #74dd99 50%, #37ce62);
+}
+input.buttonBooking:active {
+    color: rgb(255, 255, 255);
+    border-color: #5cd93a;
+    background-image: linear-gradient(#56e36d, #6ace9c);
+    box-shadow: none;
+}

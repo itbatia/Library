@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Account</title>
+    <link media="all" rel="stylesheet" th:href="@{/css/blocks.css}" type="text/css"/>
+    <link media="all" rel="stylesheet" th:href="@{/css/buttons.css}" type="text/css"/>
+</head>
+<body>
+
+<div th:class="blockMain">
+
+    <div th:class="blockOne">
+        <form th:action="@{/logout}" th:method="POST">
+            <input th:class="buttonExit" type="submit" value="Выход">
+        </form>
+    </div>
+
+    <div th:class="blockTwo">
+
+        <form th:action="@{/books}" th:method="GET">
+            <input th:class="buttonNavi" type="submit" value="Список книг библиотеки">
+        </form>
+
+        <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') or hasRole(''ROLE_LIBRARIAN'')')}">
+            <form th:method="GET" th:action="@{/people}">
+                <input th:class="buttonNavi" type="submit" value="Список всех пользователей">
+            </form>
+        </div>
+
+        <div th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+            <form th:method="GET" th:action="@{/user/myBooks}">
+                <input th:class="buttonNavi" type="submit" value="Мои книги">
+            </form>
+        </div>
+
+        <form th:action="@{/user/editAccount}" th:method="GET">
+            <input th:class="buttonNavi" type="submit" value="Перейти к редактированию профиля">
+        </form>
+
+    </div>
+
+    <div th:class="blockThree">
+
+    </div>
+
+</div>
+
+
+<!--<div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') or hasRole(''ROLE_LIBRARIAN'')')}">-->
+<!--    <br/>-->
+<!--    <form th:method="GET" th:action="@{/people}">-->
+<!--        <input type="submit" value="Список всех зарегистрированных пользователей">-->
+<!--    </form>-->
+<!--</div>-->
+<!--<br/>-->
+
+<!--<div th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">-->
+<!--    <form th:method="GET" th:action="@{/user/books}">-->
+<!--        <input type="submit" value="Мои книги">-->
+<!--    </form>-->
+<!--    <br/>-->
+<!--</div>-->
+
+<!--<form th:action="@{/logout}" th:method="POST">-->
+<!--    <input type="submit" value="Выход">-->
+<!--</form>-->
+
+</body>
+</html>

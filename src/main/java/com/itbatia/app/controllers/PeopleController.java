@@ -1,0 +1,82 @@
+package com.itbatia.app.controllers;
+
+import com.itbatia.app.dto.BookDTO;
+import com.itbatia.app.dto.PersonDTO;
+import com.itbatia.app.models.Book;
+import com.itbatia.app.models.Person;
+import com.itbatia.app.services.PersonService;
+import com.itbatia.app.utils.PersonMapper;
+import com.itbatia.app.utils.Utility;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
+
+@Controller
+@RequestMapping("/people")
+public class PeopleController {
+
+    private final PersonService personService;
+    private final PersonMapper personMapper;
+    private final ModelMapper modelMapper;
+    private final Utility utility;
+
+    @Autowired
+    public PeopleController(PersonService personService, PersonMapper personMapper, ModelMapper modelMapper, Utility utility) {
+        this.personService = personService;
+        this.personMapper = personMapper;
+        this.modelMapper = modelMapper;
+        this.utility = utility;
+    }
+
+    @GetMapping
+    public String getAllPeopleByRoleUser(Model model) {
+        model.addAttribute("people", personService.findAllByRole("ROLE_USER")
+                .stream().map(personMapper::convertToPersonDTO).toList());
+
+        return "people/allPeople";
+    }
+
+    @GetMapping("/{id}")
+    public String getById(@PathVariable("id") int id, Model model) {
+        List<Book> personBooks = personService.getBooksByPersonId(id);
+
+        model.addAttribute("person", personMapper.convertToPersonDTO(personService.findById(id)));
+        model.addAttribute("books", personBooks.stream().map(this::convertToBookDTO).toList());
+        model.addAttribute("reserveTime", utility.getReservedUntilFormatList(personBooks));
+        return "people/show";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String edit(@PathVariable("id") int id, Model model) {
+        model.addAttribute("person", personMapper.convertToPersonDTO(personService.findById(id)));
+        return "people/edit";
+    }
+
+    @PatchMapping("/{id}")
+    public String update(@PathVariable("id") int id,
+                         @ModelAttribute("person") @Valid PersonDTO personDTO, BindingResult bindingResult) {
+        Person personToUpdate = personMapper.convertToPerson(personDTO);
+
+        if (bindingResult.hasErrors())
+            return "people/edit";
+
+        personService.updatePerson(id, personToUpdate);
+        return "redirect:/people/" + id;
+    }
+
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable("id") int id) {
+        personService.delete(id);
+        return "redirect:/people";
+    }
+
+    private BookDTO convertToBookDTO(Book book) {
+        return modelMapper.map(book, BookDTO.class);
+    }
+}
