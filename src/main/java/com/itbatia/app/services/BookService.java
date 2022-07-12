@@ -132,14 +132,14 @@ public class BookService {
 
     //Поиск книги по первой букве(ам) в названии:
     public List<Book> findByTitleStartingWith(String query) {
-        if (!query.isBlank())
+        if (!query.isEmpty())
             return bookRepository.findByTitleStartingWith(query);
         return Collections.emptyList();
     }
 
     //Поиск книги по первой букве(ам) имени автора:
     public List<Book> findByAuthorStartingWith(String query) {
-        if (!query.isBlank())
+        if (!query.isEmpty())
             return bookRepository.findByAuthorStartingWith(query);
         return Collections.emptyList();
     }

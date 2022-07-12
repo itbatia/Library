@@ -26,7 +26,7 @@ public class PersonDetailsService implements UserDetailsService {
 
         Optional<Person> person = personRepository.findByUsername(username);
 
-        if (person.isEmpty()) {
+        if (!person.isPresent()) {
             throw new UsernameNotFoundException("Пользователь не найден!");
         }
         return new PersonDetails(person.get());

@@ -123,7 +123,7 @@ public class PersonService {
 
     //Поиск пользователей по первой букве(ам) в имени:
     public List<Person> findByFullNameStartingWith(String query) {
-        if (!query.isBlank())
+        if (!query.isEmpty())
             return personRepository.findByFullNameStartingWith(query);
         return Collections.emptyList();
     }
