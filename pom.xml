@@ -16,7 +16,7 @@
     <properties>
         <!-- Изменил для Heroku -->
         <!-- <java.version>17</java.version> -->
-        <java.version>11</java.version>
+        <java.version>17.0.3</java.version>
     </properties>
     <dependencies>
         <dependency>
