@@ -4,12 +4,22 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.*;
+import java.util.Date;
 
 @Getter
 @Setter
-public class PersonToUpdateDTO {
+public class PersonToUpdateYourselfDTO {
 
     private Integer id;
+
+    @NotEmpty(message = "Введите логин")
+    @Size(min = 3, max = 50, message = "Логин должен быть от 3 до 50 символов длиной")
+    @NotBlank(message = "Логин не может состоять только из пробелов")
+    private String username;
+
+    @NotEmpty(message = "Введите пароль")
+    @Size(min = 4, message = "Длинна пароля не должна быть ниже 4 символов")
+    private String password;
 
     @NotNull(message = "Введите год рождения")
     @Min(value = 1900, message = "Год рождения не может быть ниже 1900")
@@ -31,7 +41,9 @@ public class PersonToUpdateDTO {
     @NotBlank(message = "Логин не может состоять только из пробелов")
     private String patronymic;
 
-    private String role;
+//    private String role;
 
-    private Boolean booking;
+//    private Boolean booking;
+
+//    private Date createdAt;
 }

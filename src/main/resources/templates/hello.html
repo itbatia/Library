@@ -6,7 +6,7 @@
     <link media="all" rel="stylesheet" th:href="@{/css/blocks.css}" type="text/css"/>
     <link media="all" rel="stylesheet" th:href="@{/css/buttons.css}" type="text/css"/>
     <link media="all" rel="stylesheet" th:href="@{/css/page-titles.css}" type="text/css"/>
-    <link media="all" rel="stylesheet" th:href="@{/css/images.css}" type="text/css"/>
+    <link media="all" rel="stylesheet" th:href="@{/css/hello.css}" type="text/css"/>
 </head>
 
 <body>
@@ -25,11 +25,13 @@
     </div>
 
     <div th:class="blockTwoAndThree">
-        <img th:class="hello-library" src="/images/hello-library.jpg" alt="Library">
-        <h3 th:class="pageTitleHello">Уважаемый пользователь!</h3><br/>
-        <span>Данный сайт создан для того, чтобы была возможность найти нужную книгу из списка имеющихся,
-            а не ехать в библиотеку наобум. Найденную книгу можно забронировать, и, как следствие, быть
-            уверенным, что её никто не заберёт до вас!</span>
+        <br/>
+        <img th:class="hello-picture" src="/images/hello-library.jpg" alt="Library"><br/><br/>
+        <h3 th:class="pageTitleHello">Уважаемый пользователь!</h3><br/><br/>
+        <span th:class="hello-text">Данный сайт создан для того, чтобы была возможность найти<br/>нужную книгу из списка имеющихся,
+            а не ехать в библиотеку наобум.<br/>Найденную книгу можно забронировать, и, как следствие, быть
+            уверенным,<br/>что её никто не заберёт до вас!</span><br/><br/><br/><br/>
+        <img th:class="hello-picture" src="/images/hello-library-2.png" alt="Library">
     </div>
 
 </div>

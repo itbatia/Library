@@ -377,6 +377,41 @@ input.buttonReleaseBook:active {
 }
 
 
+input.buttonReleaseBook2 {
+    display: inline-block;
+    width: 12.4em;
+    font-size: 80%;
+    color: rgba(255, 255, 255, .9);
+    text-shadow: #2ebd4b 0 1px 2px;
+    text-decoration: none;
+    text-align: center;
+    line-height: 1.1;
+    white-space: pre-line;
+    padding: .7em 0;
+    border: 1px solid;
+    border-color: #5cea9a #3ad95a #3ad95a #5cea9a;
+    border-radius: 6px;
+    outline: none;
+
+    background: #60d88a linear-gradient(#89e2a8, #60d886 50%, #37ce62);
+    box-shadow: inset rgba(255, 255, 255, .5) 1px 1px;
+}
+input.buttonReleaseBook2:first-line {
+    font-size: 150%;
+    font-weight: 700;
+}
+input.buttonReleaseBook2:hover {
+    color: rgb(255, 255, 255);
+    background-image: linear-gradient(#9de7a9, #74dd99 50%, #37ce62);
+}
+input.buttonReleaseBook2:active {
+    color: rgb(255, 255, 255);
+    border-color: #5cd93a;
+    background-image: linear-gradient(#56e36d, #6ace9c);
+    box-shadow: none;
+}
+
+
 input.buttonAssignBook {
     display: inline-block;
     width: 15em;

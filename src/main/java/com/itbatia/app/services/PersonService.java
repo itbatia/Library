@@ -58,10 +58,8 @@ public class PersonService {
     private void enrichPerson(int id, Person updatedPerson) {
         Person personFromDB = findById(id);
 
-        updatedPerson.setId(id);
         updatedPerson.setUsername(personFromDB.getUsername());
         updatedPerson.setPassword(personFromDB.getPassword());
-        updatedPerson.setRole(personFromDB.getRole());
         updatedPerson.setCreatedAt(personFromDB.getCreatedAt());
     }
 
@@ -89,14 +87,6 @@ public class PersonService {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional
     public void delete(int id) {
-//        Person personToDelete = personRepository.findById(id).get();
-//        List<Book> personBooks = personToDelete.getBooks();
-//        if(!personBooks.isEmpty()){
-//            personBooks.forEach((book -> {
-//                book.setTakenAt(null);
-//                book.setReservedUntil(null);
-//            }));
-//        }
         List<Book> personBooks = personRepository.findById(id).get().getBooks();
         if (!personBooks.isEmpty()) {
             personBooks.forEach(book -> {
@@ -104,13 +94,6 @@ public class PersonService {
                 book.setReservedUntil(null);
             });
         }
-//        List<Book> personBooks = getBooksByPersonId(id);
-//        Hibernate.initialize(personBooks);
-//        personBooks.forEach(book -> {
-//            book.setTakenAt(null);
-//            book.setReservedUntil(null);
-//        });
-
         personRepository.deleteById(id);
     }
 
@@ -136,5 +119,12 @@ public class PersonService {
     private boolean expiredBook(Book book) {
         long difference = new Date().getTime() - book.getTakenAt().getTime();
         return difference > 864000000; //10 суток в миллисекундах 864000000
+    }
+
+    //Поиск пользователей по первой букве(ам) в имени:
+    public List<Person> findByFullNameStartingWith (String query) {
+        if (!query.isBlank())
+            return personRepository.findByFullNameStartingWith(query);
+        return Collections.emptyList();
     }
 }

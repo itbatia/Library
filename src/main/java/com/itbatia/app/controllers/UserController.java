@@ -1,7 +1,7 @@
 package com.itbatia.app.controllers;
 
 import com.itbatia.app.dto.BookDTO;
-import com.itbatia.app.dto.PersonToUpdateDTO;
+import com.itbatia.app.dto.PersonToUpdateYourselfDTO;
 import com.itbatia.app.models.Book;
 import com.itbatia.app.models.Person;
 import com.itbatia.app.services.BookService;
@@ -49,14 +49,14 @@ public class UserController {
 
     @GetMapping("/editAccount")
     public String editAccount(Model model) {
-        model.addAttribute("person", personMapper.convertToPersonToUpdateDTO(utility.getUserFromContext()));
+        model.addAttribute("person", personMapper.convertToPersonToUpdateYourselfDTO(utility.getUserFromContext()));
         return "user/editAccount";
     }
 
     @PatchMapping("/editAccount")
-    public String updateAccount(@ModelAttribute("person") @Valid PersonToUpdateDTO personToUpdateDTO,
+    public String updateAccount(@ModelAttribute("person") @Valid PersonToUpdateYourselfDTO personToUpdateYourselfDTO,
                                 BindingResult bindingResult) {
-        Person personToUpdate = personMapper.convertToPerson(personToUpdateDTO);
+        Person personToUpdate = personMapper.convertToPerson(personToUpdateYourselfDTO);
 
         personValidator.validate(personToUpdate, bindingResult);
 

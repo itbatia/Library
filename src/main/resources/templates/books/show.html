@@ -35,12 +35,28 @@
     </div>
 
     <div th:class="blockThree">
-        <h2 th:class="pageTitle">Информация о книге</h2>
+        <h2 th:class="pageTitle">Информация о книге</h2><br/>
 
-        <!--/*@thymesVar id="book" type="com.itbatia.app.dto.BookDTO"*/-->
-        <span th:text="'Название : ' + ${book.getTitle()}">Title</span><br/>
-        <span th:text="'Автор: ' + ${book.getAuthor()}">Author</span><br/>
-        <span th:text="'Жанр: ' + ${book.getGenre().getGenreTitle()}">Genre</span><br/><br/>
+        <table>
+            <tr>
+                <td rowspan="3"><img src="/images/book.png" height="60" alt="Books"></td>
+                <td> Название: </td>
+                <td th:text="${book.getTitle()}">Title</td>
+            </tr>
+            <tr>
+                <td> Автор: </td>
+                <td th:text="${book.getAuthor()}">Author</td>
+            </tr>
+            <tr>
+                <td> Жанр: </td>
+                <td th:text="${book.getGenre().getGenreTitle()}">Genre</td>
+            </tr>
+        </table>
+        <br/><br/>
+        <!--        &lt;!&ndash;/*@thymesVar id="book" type="com.itbatia.app.dto.BookDTO"*/&ndash;&gt;-->
+        <!--        <span th:text="'Название : ' + ${book.getTitle()}">Title</span><br/>-->
+        <!--        <span th:text="'Автор: ' + ${book.getAuthor()}">Author</span><br/>-->
+        <!--        <span th:text="'Жанр: ' + ${book.getGenre().getGenreTitle()}">Genre</span><br/><br/>-->
 
         <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') or hasRole(''ROLE_LIBRARIAN'')')}">
 
@@ -66,7 +82,7 @@
                     <span style="color:blueviolet" th:text="${reserveTime}">VALUE</span>
 
                     <form th:method="PATCH" th:action="@{/books/{id}/removeReserve(id=${book.getId()})}">
-                        <input th:class="buttonNavi" type="submit" value="Снять бронь"/>
+                        <input th:class="buttonReleaseBook2" type="submit" value="Снять бронь"/>
                     </form>
                 </div>
 
@@ -95,7 +111,7 @@
 
             <div style="color:blueviolet" th:if="${book.getReservedUntil()!=null}">
                 <div th:if="${currentUser==null}"><span>Книга уже забронирована</span></div>
-                <div style="color:limegreen" th:if="${currentUser}">
+                <div style="color:limegreen" th:if="${currentUser!=null}">
                     <span>Эта книга забронирована вами до </span>
                     <span th:text="${reserveTime}">VALUE</span>
                     <form th:method="PATCH" th:action="@{/books/{id}/removeReserve(id=${book.getId()})}">

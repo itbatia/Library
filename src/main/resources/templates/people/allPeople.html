@@ -22,6 +22,9 @@
     </div>
 
     <div th:class="blockTwo">
+        <form th:method="GET" th:action="@{/people/search}">
+            <input th:class="buttonNavi" type="submit" value="Поиск пользователей">
+        </form>
         <form th:method="GET" th:action="@{/books}">
             <input th:class="buttonNavi" type="submit" value="Перейти к списку книг">
         </form>
@@ -29,14 +32,32 @@
 
     <div th:class="blockThree">
         <h2 th:class="pageTitle">Список зарегистрированных пользователей</h2>
-        <!--/*@thymesVar id="people" type="com.itbatia.app.dto.PersonDTO"*/-->
-        <div th:class="scrollableList">
-            <div th:each="person : ${people}">
-                <a th:href="@{/people/{id}(id=${person.getId()})}"
-                   th:text="${person.getFullName()}">user</a>
-            </div>
-        </div>
+
+        <table>
+            <tr>
+                <th></th>
+                <th>Полное имя</th>
+            </tr>
+            <!--/*@thymesVar id="people" type="com.itbatia.app.dto.PersonDTO"*/-->
+            <tr th:each="person : ${people}">
+                <td th:if="${person.getFullName().endsWith('а') || person.getFullName().endsWith('a')}">
+                    <img th:src="@{images/logo-she.png}" height="14" alt="She"></td>
+                <td th:if="${!person.getFullName().endsWith('а') && !person.getFullName().endsWith('a')}">
+                    <img th:src="@{images/logo-he.png}" height="14" alt="He"></td>
+                <td>
+                    <a th:href="@{/people/{id}(id=${person.getId()})}"
+                       th:text="${person.getFullName()}">Full name</a>
+                </td>
+            </tr>
+        </table>
+        <!--        <div th:class="scrollableList">-->
+        <!--            <div th:each="person : ${people}">-->
+        <!--                <a th:href="@{/people/{id}(id=${person.getId()})}"-->
+        <!--                   th:text="${person.getFullName()}">user</a>-->
+        <!--            </div>-->
+
     </div>
+</div>
 
 </div>
 

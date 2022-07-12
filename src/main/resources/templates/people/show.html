@@ -33,20 +33,34 @@
     <div th:class="blockThree">
         <h2 th:class="pageTitle">Информация о пользователе</h2>
 
-        <!--/*@thymesVar id="person" type="com.itbatia.app.dto.PersonDTO"*/-->
-        <span th:text="'Имя : ' + ${person.getFullName()}">VALUE</span><br/>
-        <span th:text="'Год рождения: ' + ${person.getYearOfBirth()}">VALUE</span><br/>
-        <span th:text="'Возможность бронировать книги на сайте: ' + ${person.getBooking()}">VALUE</span><br/>
-        <span th:text="'Дата создания аккаунта: ' + ${person.getCreatedAt()}">VALUE</span>
+        <table>
+            <tr>
+                <td rowspan="4">
+                    <img th:if="${person.getFullName().endsWith('а') || person.getFullName().endsWith('a')}"
+                         src="/images/logo-she.png" height="60" alt="She">
+                    <img th:if="${!person.getFullName().endsWith('а') && !person.getFullName().endsWith('a')}"
+                         src="/images/logo-he.png" height="60" alt="He">
+                </td>
+                <td th:text="'Полное имя : ' + ${person.getFullName()}">FullName</td>
+            </tr>
+            <tr>
+                <td th:text="'Год рождения: ' + ${person.getYearOfBirth()}">YearOfBirth</td>
+            </tr>
+            <tr>
+                <td th:text="'Возможность бронировать книги на сайте: ' + ${person.getBooking()}">Booking</td>
+            </tr>
+            <tr>
+                <td th:text="'Дата создания аккаунта: ' + ${person.getCreatedAt()}">CreatedAt</td>
+            </tr>
+        </table>
         <br/>
-        <!--        <span style="color: #2970a9">Имя : </span>-->
-        <!--        <span th:text="${person.getFullName()}">VALUE</span><br/>-->
-        <!--        <span style="color: #2970a9">Год рождения: </span>-->
-        <!--        <span th:text="${person.getYearOfBirth()}">VALUE</span><br/>-->
-        <!--        <span style="color: #2970a9">Возможность бронировать книги на сайте: </span>-->
-        <!--        <span th:text="${person.getBooking()}">VALUE</span><br/>-->
-        <!--        <span style="color: #2970a9">Дата создания аккаунта: </span>-->
-        <!--        <span th:text="${person.getCreatedAt()}">VALUE</span><br/>-->
+
+<!--        &lt;!&ndash;/*@thymesVar id="person" type="com.itbatia.app.dto.PersonDTO"*/&ndash;&gt;-->
+<!--        <span th:text="'Полное имя : ' + ${person.getFullName()}">VALUE</span><br/>-->
+<!--        <span th:text="'Год рождения: ' + ${person.getYearOfBirth()}">VALUE</span><br/>-->
+<!--        <span th:text="'Возможность бронировать книги на сайте: ' + ${person.getBooking()}">VALUE</span><br/>-->
+<!--        <span th:text="'Дата создания аккаунта: ' + ${person.getCreatedAt()}">VALUE</span>-->
+<!--        <br/><br/>-->
 
         <div th:if="${books.isEmpty()}">
             <p style="color: blueviolet">Человек пока не взял ни одной книги</p>
@@ -54,8 +68,6 @@
 
         <!--/*@thymesVar id="books" type="com.itbatia.app.dto.BookDTO"*/-->
         <div th:if="${!books.isEmpty()}">
-
-            <hr/>
 
             <div th:class="scrollableForShowPerson">
 
@@ -82,7 +94,7 @@
                 </table>
 
             </div>
-            <hr/>
+
         </div>
 
     </div>

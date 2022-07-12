@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Поиск пользователей</title>
+    <link media="all" rel="stylesheet" th:href="@{/css/blocks.css}" type="text/css"/>
+    <link media="all" rel="stylesheet" th:href="@{/css/buttons.css}" type="text/css"/>
+    <link media="all" rel="stylesheet" th:href="@{/css/page-titles.css}" type="text/css"/>
+    <link media="all" rel="stylesheet" th:href="@{/css/scrollable-list.css}" type="text/css"/>
+    <link media="all" rel="stylesheet" th:href="@{/css/select.css}" type="text/css"/>
+</head>
+<body>
+
+<div th:class="blockMain">
+
+    <div th:class="blockOne">
+        <form th:action="@{/logout}" th:method="POST">
+            <input th:class="buttonExit" type="submit" value="Выход">
+        </form>
+        <form th:method="GET" th:action="@{/people}">
+            <input th:class="buttonBackToPeople" type="submit" value="Вернуться к списку пользователей">
+        </form>
+    </div>
+
+    <div th:class="blockTwo">
+        <div th:class="select">
+
+            <form th:method="POST" th:action="@{/people/search}">
+
+                <label for="query">Введите поисковый запрос: </label>
+                <input id="query" name="query" type="text">
+                <br><br>
+                <input th:class="buttonNavi" type="submit" value="Искать">
+
+            </form>
+
+        </div>
+    </div>
+
+    <div th:class="blockThree">
+        <h2 th:class="pageTitle">Результат поиска: </h2>
+
+        <div th:class="scrollableList">
+
+            <!--/*@thymesVar id="people" type="com.itbatia.app.dto.PersonDTO"*/-->
+            <div th:if="${people}">
+                <div th:if="${people.isEmpty()}"><span>Пользователей не найдено</span></div>
+
+                <div th:if="${!people.isEmpty()}">
+                    <table>
+                        <tr>
+                            <th></th>
+                            <th>Полное имя</th>
+                        </tr>
+                        <!--/*@thymesVar id="people" type="com.itbatia.app.dto.PersonDTO"*/-->
+                        <tr th:each="person : ${people}">
+                            <td th:if="${person.getFullName().endsWith('а') || person.getFullName().endsWith('a')}">
+                                <img src="/images/logo-she.png" height="14" alt="She"></td>
+                            <td th:if="${!person.getFullName().endsWith('а') && !person.getFullName().endsWith('a')}">
+                                <img src="/images/logo-he.png" height="14" alt="He"></td>
+                            <td>
+                                <a th:href="@{/people/{id}(id=${person.getId()})}"
+                                   th:text="${person.getFullName()}">Full name</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

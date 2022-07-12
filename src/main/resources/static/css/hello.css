@@ -1,0 +1,12 @@
+.hello-picture {
+    width: 150px;
+    height: 120px;
+    position: relative;
+    left: 432px;
+}
+
+.hello-text {
+    display:block;
+    width:100%;
+    text-align: center;
+}

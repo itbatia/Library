@@ -53,52 +53,194 @@
             <div th:if="${books}">
                 <div th:if="${books.isEmpty()}"><span>Книг не найдено</span></div>
 
-                <div th:each="book : ${books}">
-                    <a th:href="@{/books/{id}(id=${book.getId()})}"
-                       th:text="${book.getTitle() + ', ' + book.getAuthor() + ', ' + book.getGenre().getGenreTitle()}">book</a>
 
-                    <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') or hasRole(''ROLE_LIBRARIAN'')')}">
+                <div th:if="${!books.isEmpty()}">
 
-                        <div th:if="${book.getOwner()!=null}">
-                            <div th:if="${book.getReservedUntil()!=null}">
-                                <span style="color:blueviolet">Книга забронирована пользователем: </span>
-                                <span th:text="${book.getOwner().getFullName()}">Owner's fullName</span>
-                            </div>
+                    <span th:if="${amount} == 1">По вашему запросу найдена 1 книга</span>
+                    <span th:if="${amount} == 2 OR ${amount} == 3 OR ${amount} == 4"
+                          th:text="'По вашему запросу найдено ' + ${amount} + ' книги:'">Text</span>
+                    <span th:if="${amount} > 4"
+                          th:text="'По вашему запросу найдено ' + ${amount} + ' книг:'">Text</span>
+                    <br/><br/>
 
-                            <div th:if="${book.getTakenAt()!=null}">
-                                <span style="color:blueviolet">Книга на руках у: </span>
-                                <span th:text="${book.getOwner().getFullName()}">FullName</span>
-                            </div>
-                        </div>
+                    <table th:each="book : ${books}">
+                        <tr>
+                            <td rowspan="3"><img src="/images/book.png" height="60" alt="Books"></td>
+                            <td>Название:</td>
+                            <td>
+                                <a th:href="@{/books/{id}(id=${book.getId()})}"
+                                   th:text="${book.getTitle()}">Title</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Автор:</td>
+                            <td th:text="${book.getAuthor()}">Author</td>
+                        </tr>
+                        <tr>
+                            <td>Жанр:</td>
+                            <td th:text="${book.getGenre().getGenreTitle()}">Genre</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') or hasRole(''ROLE_LIBRARIAN'')')}">
+                                <div th:if="${book.getOwner()!=null}">
+                                    <div th:if="${book.getReservedUntil()!=null}">
+                                        <span style="color:blueviolet">Книга забронирована пользователем: </span>
+                                        <span th:text="${book.getOwner().getFullName()}">Owner's fullName</span>
+                                    </div>
 
-                        <div style="color:blueviolet" th:if="${book.getOwner()==null}">
-                            <span>Книга свободна</span>
-                        </div>
+                                    <div th:if="${book.getTakenAt()!=null}">
+                                        <span style="color:blueviolet">Книга на руках у: </span>
+                                        <span th:text="${book.getOwner().getFullName()}">FullName</span>
+                                    </div>
+                                </div>
 
-                    </div>
+                                <div style="color:limegreen" th:if="${book.getOwner()==null}">
+                                    <span>Книга свободна</span>
+                                </div>
+                                <br/>
+                            </td>
+                            <td th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
 
-                    <div th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+                                <div style="color:blueviolet" th:if="${book.getTakenAt()!=null}">
+                                    <div style="color:limegreen" th:if="${book.getOwner()==currentUser}">
+                                        <span>Эта книга у вас на руках</span>
+                                    </div>
+                                    <div style="color:blueviolet" th:if="${book.getOwner()!=currentUser}">
+                                        <span>Книга на руках</span>
+                                    </div>
+                                </div>
 
-                        <div style="color:blueviolet" th:if="${book.getTakenAt()!=null}"><span>Книга на руках</span>
-                        </div>
+                                <div th:if="${book.getReservedUntil()!=null}">
+                                    <div style="color:blueviolet" th:if="${book.getOwner()!=currentUser}">
+                                        <span>Книга уже забронирована</span>
+                                    </div>
+                                    <div style="color:limegreen" th:if="${book.getOwner()==currentUser}">
+                                        <span>Эта книга забронирована вами</span>
+                                    </div>
+                                </div>
 
-                        <div th:if="${book.getReservedUntil()!=null}">
+                                <div style="color:blueviolet" th:if="${book.getOwner()==null}">
+                                    <span>Книга свободна</span>
+                                </div>
+                                <br/>
 
-                            <div style="color:blueviolet" th:if="${book.getOwner()!=currentUser}">
-                                <span>Книга уже забронирована</span>
-                            </div>
+                            </td>
+                        </tr>
+                    </table>
 
-                            <div style="color:limegreen" th:if="${book.getOwner()==currentUser}">
-                                <span>Эта книга забронирована вами</span>
-                                <form th:method="PATCH" th:action="@{/books/{id}/removeReserve(id=${book.getId()})}">
-                                    <input type="submit" value="Снять бронь">
-                                </form>
-                            </div>
 
-                        </div>
+                    <!--                    <table>-->
+                    <!--                        <tr>-->
+                    <!--                            <th></th>-->
+                    <!--                            <th>Название</th>-->
+                    <!--                            <th>Автор</th>-->
+                    <!--                            <th>Жанр</th>-->
+                    <!--                            <th>Комментарий</th>-->
+                    <!--                        </tr>-->
+                    <!--                        <tr th:each="book : ${books}">-->
+                    <!--                            <td><img src="/images/book.png" height="14" alt="Books"></td>-->
+                    <!--                            <td>-->
+                    <!--                                <a th:href="@{/books/{id}(id=${book.getId()})}"-->
+                    <!--                                   th:text="${book.getTitle()}">Title</a>-->
+                    <!--                            </td>-->
+                    <!--                            <td th:text="${book.getAuthor()}">Author</td>-->
+                    <!--                            <td th:text="${book.getGenre().getGenreTitle()}">Genre</td>-->
 
-                    </div>
+                    <!--                            <td th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') or hasRole(''ROLE_LIBRARIAN'')')}">-->
+                    <!--                                <div th:if="${book.getOwner()!=null}">-->
+                    <!--                                    <div th:if="${book.getReservedUntil()!=null}">-->
+                    <!--                                        <span style="color:blueviolet">Книга забронирована пользователем: </span>-->
+                    <!--                                        <span th:text="${book.getOwner().getFullName()}">Owner's fullName</span>-->
+                    <!--                                    </div>-->
+
+                    <!--                                    <div th:if="${book.getTakenAt()!=null}">-->
+                    <!--                                        <span style="color:blueviolet">Книга на руках у: </span>-->
+                    <!--                                        <span th:text="${book.getOwner().getFullName()}">FullName</span>-->
+                    <!--                                    </div>-->
+                    <!--                                </div>-->
+
+                    <!--                                <div style="color:blueviolet" th:if="${book.getOwner()==null}">-->
+                    <!--                                    <span>Книга свободна</span>-->
+                    <!--                                </div>-->
+                    <!--                            </td>-->
+                    <!--                            <td th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">-->
+                    <!--                                <div style="color:blueviolet" th:if="${book.getTakenAt()!=null}">-->
+                    <!--                                    <span>Книга на руках</span>-->
+                    <!--                                </div>-->
+
+                    <!--                                <div th:if="${book.getReservedUntil()!=null}">-->
+
+                    <!--                                    <div style="color:blueviolet" th:if="${book.getOwner()!=currentUser}">-->
+                    <!--                                        <span>Книга уже забронирована</span>-->
+                    <!--                                    </div>-->
+
+                    <!--                                    <div style="color:limegreen" th:if="${book.getOwner()==currentUser}">-->
+                    <!--                                        <span>Эта книга забронирована вами</span>-->
+                    <!--                                        <form th:method="PATCH"-->
+                    <!--                                              th:action="@{/books/{id}/removeReserve(id=${book.getId()})}">-->
+                    <!--                                            <input type="submit" value="Снять бронь">-->
+                    <!--                                        </form>-->
+                    <!--                                    </div>-->
+
+                    <!--                                </div>-->
+                    <!--                            </td>-->
+                    <!--                        </tr>-->
+                    <!--                    </table>-->
+
+
+                    <!--                                        <div th:each="book : ${books}">-->
+                    <!--                                            <a th:href="@{/books/{id}(id=${book.getId()})}"-->
+                    <!--                                               th:text="${book.getTitle() + ', ' + book.getAuthor() + ', ' + book.getGenre().getGenreTitle()}">book</a>-->
+
+                    <!--                                            <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') or hasRole(''ROLE_LIBRARIAN'')')}">-->
+
+                    <!--                                                <div th:if="${book.getOwner()!=null}">-->
+                    <!--                                                    <div th:if="${book.getReservedUntil()!=null}">-->
+                    <!--                                                        <span style="color:blueviolet">Книга забронирована пользователем: </span>-->
+                    <!--                                                        <span th:text="${book.getOwner().getFullName()}">Owner's fullName</span>-->
+                    <!--                                                    </div>-->
+
+                    <!--                                                    <div th:if="${book.getTakenAt()!=null}">-->
+                    <!--                                                        <span style="color:blueviolet">Книга на руках у: </span>-->
+                    <!--                                                        <span th:text="${book.getOwner().getFullName()}">FullName</span>-->
+                    <!--                                                    </div>-->
+                    <!--                                                </div>-->
+
+                    <!--                                                <div style="color:blueviolet" th:if="${book.getOwner()==null}">-->
+                    <!--                                                    <span>Книга свободна</span>-->
+                    <!--                                                </div>-->
+
+                    <!--                                            </div>-->
+
+                    <!--                                            <div th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">-->
+
+                    <!--                                                <div style="color:blueviolet" th:if="${book.getTakenAt()!=null}"><span>Книга на руках</span>-->
+                    <!--                                                </div>-->
+
+                    <!--                                                <div th:if="${book.getReservedUntil()!=null}">-->
+
+                    <!--                                                    <div style="color:blueviolet" th:if="${book.getOwner()!=currentUser}">-->
+                    <!--                                                        <span>Книга уже забронирована</span>-->
+                    <!--                                                    </div>-->
+
+                    <!--                                                    <div style="color:limegreen" th:if="${book.getOwner()==currentUser}">-->
+                    <!--                                                        <span>Эта книга забронирована вами</span>-->
+                    <!--                                                        <form th:method="PATCH"-->
+                    <!--                                                              th:action="@{/books/{id}/removeReserve(id=${book.getId()})}">-->
+                    <!--                                                            <input type="submit" value="Снять бронь">-->
+                    <!--                                                        </form>-->
+                    <!--                                                    </div>-->
+
+                    <!--                                                </div>-->
+
+                    <!--                                            </div>-->
+                    <!--                                        </div>-->
+
                 </div>
+
+
             </div>
         </div>
     </div>

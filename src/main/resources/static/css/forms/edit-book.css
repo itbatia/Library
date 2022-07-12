@@ -106,12 +106,9 @@
     border: 1px solid #ed1c24;
     outline: none;
 }
-
-#firstName { background-position: 5px 5px !important }
-#lastName { background-position: 5px 5px !important }
-#patronymic { background-position: 5px 5px !important }
-#yearOfBirth { background-position: 5px 5px !important }
-#booking { background-position: 5px 5px !important }
+#title { background-position: 5px 5px !important }
+#author { background-position: 5px 5px !important }
+#genre { background-position: 5px 5px !important }
 
 /*Кнопка*/
 #content form input[type="submit"] {
@@ -131,8 +128,8 @@
     outline: none;
     background: #60a3d8 linear-gradient(#89bbe2, #60a3d8 50%, #378bce);
     box-shadow: inset rgba(255,255,255,.5) 1px 1px;
-    margin-top: 30px;
-    margin-bottom: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 #content form input[type="submit"]:first-line {
     font-size: 150%;

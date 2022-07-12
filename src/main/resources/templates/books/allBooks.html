@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Список всех книг</title>
-    <link media="all" rel="stylesheet" th:href="@{/css/blocks.css}" type="text/css"/>
-    <link media="all" rel="stylesheet" th:href="@{/css/buttons.css}" type="text/css"/>
-    <link media="all" rel="stylesheet" th:href="@{/css/page-titles.css}" type="text/css"/>
-    <link media="all" rel="stylesheet" th:href="@{/css/scrollable-list.css}" type="text/css"/>
-    <link media="all" rel="stylesheet" th:href="@{/css/select.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/blocks.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/buttons.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/page-titles.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/scrollable-list.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/select.css}" type="text/css"/>
 </head>
 <body>
 
@@ -72,11 +72,29 @@
         <h2 th:class="pageTitle">Список всех книг в библиотеке</h2>
 
         <div th:class="scrollableList">
-            <!--/*@thymesVar id="books" type="com.itbatia.app.dto.BookDTO"*/-->
-            <div th:each="book : ${books}">
-                <a th:href="@{/books/{id}(id=${book.getId()})}"
-                   th:text="${book.getTitle() + ', ' + book.getAuthor() + ', ' + book.getGenre().getGenreTitle()}">book</a>
-            </div>
+
+            <table>
+                <tr>
+                    <th></th>
+                    <th>Название</th>
+                    <th>Автор</th>
+                    <th>Жанр</th>
+                </tr>
+                <tr th:each="book : ${books}">
+                    <td><img th:src="@{images/book.png}" height="14" alt="Books"></td>
+                    <td>
+                        <a th:href="@{/books/{id}(id=${book.getId()})}"
+                           th:text="${book.getTitle()}">Title</a>
+                    </td>
+                    <td th:text="${book.getAuthor()}">Author</td>
+                    <td th:text="${book.getGenre().getGenreTitle()}">Genre</td>
+                </tr>
+            </table>
+
+            <!--            <div th:each="book : ${books}">-->
+            <!--                <a th:href="@{/books/{id}(id=${book.getId()})}"-->
+            <!--                   th:text="${book.getTitle() + ', ' + book.getAuthor() + ', ' + book.getGenre().getGenreTitle()}">book</a>-->
+            <!--            </div>-->
         </div>
     </div>
 

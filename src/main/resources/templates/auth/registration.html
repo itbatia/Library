@@ -26,12 +26,12 @@
                 <h1>Reg Form</h1>
                 <p>Введите данные для создания аккаунта:</p>
 
-                <input type="text" placeholder="Имя" required="" th:field="*{firstName}" id="firstName"/>
-                <div style="color:red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">FirstName Error</div>
-                <br/>
-
                 <input type="text" placeholder="Фамилия" th:field="*{lastName}" id="lastName"/>
                 <div style="color:red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">LastName Error</div>
+                <br/>
+
+                <input type="text" placeholder="Имя" th:field="*{firstName}" id="firstName"/>
+                <div style="color:red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">FirstName Error</div>
                 <br/>
 
                 <input type="text" placeholder="Отчество" th:field="*{patronymic}" id="patronymic"/>

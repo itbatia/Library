@@ -1,7 +1,8 @@
 package com.itbatia.app.controllers;
 
 import com.itbatia.app.dto.BookDTO;
-import com.itbatia.app.dto.PersonDTO;
+import com.itbatia.app.dto.PersonToUpdateDTO;
+import com.itbatia.app.dto.PersonToUpdateYourselfDTO;
 import com.itbatia.app.models.Book;
 import com.itbatia.app.models.Person;
 import com.itbatia.app.services.PersonService;
@@ -54,13 +55,13 @@ public class PeopleController {
 
     @GetMapping("/{id}/edit")
     public String edit(@PathVariable("id") int id, Model model) {
-        model.addAttribute("person", personMapper.convertToPersonDTO(personService.findById(id)));
+        model.addAttribute("person", personMapper.convertToPersonToUpdateDTO(personService.findById(id)));
         return "people/edit";
     }
 
     @PatchMapping("/{id}")
     public String update(@PathVariable("id") int id,
-                         @ModelAttribute("person") @Valid PersonDTO personDTO, BindingResult bindingResult) {
+                         @ModelAttribute("person") @Valid PersonToUpdateDTO personDTO, BindingResult bindingResult) {
         Person personToUpdate = personMapper.convertToPerson(personDTO);
 
         if (bindingResult.hasErrors())
@@ -74,6 +75,20 @@ public class PeopleController {
     public String delete(@PathVariable("id") int id) {
         personService.delete(id);
         return "redirect:/people";
+    }
+
+    @GetMapping("/search")
+    public String searchPage() {
+        return "people/search";
+    }
+
+    @PostMapping("/search")
+    public String makeSearch(@RequestParam("query") String query, Model model) {
+
+        model.addAttribute("people", personService.findByFullNameStartingWith(query)
+                .stream().map(personMapper::convertToPersonDTO).toList());
+
+        return "people/search";
     }
 
     private BookDTO convertToBookDTO(Book book) {
