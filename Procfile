@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -jar webapp-runner.jar --port $PORT target/*.war
+web: java -jar target/SpringBootSecurityLibrary-0.0.1-SNAPSHOT.jar
