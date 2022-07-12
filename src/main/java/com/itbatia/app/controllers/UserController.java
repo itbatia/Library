@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/user")
@@ -71,7 +72,7 @@ public class UserController {
     public String getUserBooks(Model model) {
         List<Book> userBooks = utility.getUserFromContext().getBooks();
 
-        model.addAttribute("books", userBooks.stream().map(this::convertToBookDTO).toList());
+        model.addAttribute("books", userBooks.stream().map(this::convertToBookDTO).collect(Collectors.toList()));
         model.addAttribute("reservedUntilFormatList", utility.getReservedUntilFormatList(userBooks));
 
         return "user/myBooks";

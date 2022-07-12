@@ -76,7 +76,7 @@ public class BookController {
             }
         } else {
             model.addAttribute("people", personService.findAllByRole("ROLE_USER")
-                    .stream().map(personMapper::convertToPersonDTO).toList());
+                    .stream().map(personMapper::convertToPersonDTO).collect(Collectors.toList()));
         }
         return "books/show";
     }
@@ -164,7 +164,7 @@ public class BookController {
         } else if (searchBy.equals("author")) {
             books = bookService.findByAuthorStartingWith(query);
         }
-        model.addAttribute("books", books.stream().map(this::convertToBookDTO).toList());
+        model.addAttribute("books", books.stream().map(this::convertToBookDTO).collect(Collectors.toList()));
         model.addAttribute("amount", books.size());
         model.addAttribute("currentUser", utility.getUserFromContext());
 

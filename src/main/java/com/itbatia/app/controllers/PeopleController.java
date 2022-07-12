@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/people")
@@ -38,7 +39,7 @@ public class PeopleController {
     @GetMapping
     public String getAllPeopleByRoleUser(Model model) {
         model.addAttribute("people", personService.findAllByRole("ROLE_USER")
-                .stream().map(personMapper::convertToPersonDTO).toList());
+                .stream().map(personMapper::convertToPersonDTO).collect(Collectors.toList()));
 
         return "people/allPeople";
     }
@@ -48,7 +49,7 @@ public class PeopleController {
         List<Book> personBooks = personService.getBooksByPersonId(id);
 
         model.addAttribute("person", personMapper.convertToPersonDTO(personService.findById(id)));
-        model.addAttribute("books", personBooks.stream().map(this::convertToBookDTO).toList());
+        model.addAttribute("books", personBooks.stream().map(this::convertToBookDTO).collect(Collectors.toList()));
         model.addAttribute("reserveTime", utility.getReservedUntilFormatList(personBooks));
         return "people/show";
     }
@@ -86,7 +87,7 @@ public class PeopleController {
     public String makeSearch(@RequestParam("query") String query, Model model) {
 
         model.addAttribute("people", personService.findByFullNameStartingWith(query)
-                .stream().map(personMapper::convertToPersonDTO).toList());
+                .stream().map(personMapper::convertToPersonDTO).collect(Collectors.toList()));
 
         return "people/search";
     }
