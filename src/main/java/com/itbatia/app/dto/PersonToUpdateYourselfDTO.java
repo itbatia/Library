@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.*;
-import java.util.Date;
 
 @Getter
 @Setter
@@ -40,10 +39,4 @@ public class PersonToUpdateYourselfDTO {
     @Size(min = 2, max = 20, message = "Отчество должно быть от 2 до 20 символов длиной")
     @NotBlank(message = "Логин не может состоять только из пробелов")
     private String patronymic;
-
-//    private String role;
-
-//    private Boolean booking;
-
-//    private Date createdAt;
 }

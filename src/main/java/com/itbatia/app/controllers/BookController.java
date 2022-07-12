@@ -157,7 +157,7 @@ public class BookController {
 
     @PostMapping("/search")
     public String makeSearch(@RequestParam("query") String query, Model model,
-                                    @RequestParam("searchBy") String searchBy) {
+                             @RequestParam("searchBy") String searchBy) {
         List<Book> books = new ArrayList<>();
         if (searchBy.equals("title")) {
             books = bookService.findByTitleStartingWith(query);

@@ -40,11 +40,10 @@ public class Book {
     private Person owner;
 
     @Column(name = "reserved_until")
-//    @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime reservedUntil;
 
-    @Transient
-    private boolean reserveTimeExpired;
+//    @Transient
+//    private boolean reserveTimeExpired;
 
     @Column(name = "taken_at")
     @Temporal(TemporalType.DATE)

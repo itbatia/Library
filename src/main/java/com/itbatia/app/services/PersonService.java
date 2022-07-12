@@ -115,14 +115,14 @@ public class PersonService {
         }
     }
 
-    //Проверка просрочки книги?
+    //Проверка просрочки книги:
     private boolean expiredBook(Book book) {
         long difference = new Date().getTime() - book.getTakenAt().getTime();
         return difference > 864000000; //10 суток в миллисекундах 864000000
     }
 
     //Поиск пользователей по первой букве(ам) в имени:
-    public List<Person> findByFullNameStartingWith (String query) {
+    public List<Person> findByFullNameStartingWith(String query) {
         if (!query.isBlank())
             return personRepository.findByFullNameStartingWith(query);
         return Collections.emptyList();

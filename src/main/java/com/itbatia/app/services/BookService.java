@@ -27,10 +27,6 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 
-    public List<Book> getAllBooks() {
-        return bookRepository.findAll();
-    }
-
     public Book findById(int id) {
         return bookRepository.findById(id).orElse(null);
     }
@@ -55,12 +51,12 @@ public class BookService {
         return bookRepository.findByTitleAndAuthor(book.getTitle(), book.getAuthor());
     }
 
-    public List<Book> getByReservedUntilNotNull(){
+    public List<Book> getByReservedUntilNotNull() {
         return bookRepository.findByReservedUntilNotNull();
     }
 
     @Transactional
-    public void updateReserveUntilAndOwner(int bookId){
+    public void updateReserveUntilAndOwner(int bookId) {
         Book bookToUpdate = bookRepository.findById(bookId).get();
         bookToUpdate.setReservedUntil(null);
         bookToUpdate.setOwner(null);

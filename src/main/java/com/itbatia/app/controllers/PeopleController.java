@@ -2,7 +2,6 @@ package com.itbatia.app.controllers;
 
 import com.itbatia.app.dto.BookDTO;
 import com.itbatia.app.dto.PersonToUpdateDTO;
-import com.itbatia.app.dto.PersonToUpdateYourselfDTO;
 import com.itbatia.app.models.Book;
 import com.itbatia.app.models.Person;
 import com.itbatia.app.services.PersonService;
@@ -28,7 +27,8 @@ public class PeopleController {
     private final Utility utility;
 
     @Autowired
-    public PeopleController(PersonService personService, PersonMapper personMapper, ModelMapper modelMapper, Utility utility) {
+    public PeopleController(PersonService personService, PersonMapper personMapper,
+                            ModelMapper modelMapper, Utility utility) {
         this.personService = personService;
         this.personMapper = personMapper;
         this.modelMapper = modelMapper;

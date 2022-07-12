@@ -1,54 +1,3 @@
-/**********  These are original 2 buttons:  **********/
-
-/*a.registration {*/
-/*    display: inline-block;*/
-/*    width: 15em;*/
-/*    font-size: 80%;*/
-/*    color: rgba(255,255,255,.9);*/
-/*    text-shadow: #2e7ebd 0 1px 2px;*/
-/*    text-decoration: none;*/
-/*    text-align: center;*/
-/*    line-height: 1.1;*/
-/*    white-space: pre-line;*/
-/*    padding: .7em 0;*/
-/*    border: 1px solid;*/
-/*    border-color: #60a3d8 #2970a9 #2970a9 #60a3d8;*/
-/*    border-radius: 6px;*/
-/*    outline: none;*/
-/*    background: #60a3d8 linear-gradient(#89bbe2, #60a3d8 50%, #378bce);*/
-/*    box-shadow: inset rgba(255,255,255,.5) 1px 1px;*/
-/*}*/
-/*a.registration:first-line{*/
-/*    font-size: 170%;*/
-/*    font-weight: 700;*/
-/*}*/
-/*a.registration:hover {*/
-/*    color: rgb(255,255,255);*/
-/*    background-image: linear-gradient(#9dc7e7, #74afdd 50%, #378bce);*/
-/*}*/
-/*a.registration:active {*/
-/*    color: rgb(255,255,255);*/
-/*    border-color: #2970a9;*/
-/*    background-image: linear-gradient(#5796c8, #6aa2ce);*/
-/*    box-shadow: none;*/
-/*}*/
-
-/*a.enter {*/
-/*    display: inline-block;*/
-/*    color: white;*/
-/*    font-weight: 700;*/
-/*    text-decoration: none;*/
-/*    user-select: none;*/
-/*    padding: .5em 2em;*/
-/*    outline: none;*/
-/*    border: 2px solid;*/
-/*    !*border-radius: 1px;*!*/
-/*    border-radius: 4px;*/
-/*    transition: 0.2s;*/
-/*}*/
-/*a.enter:hover { background: rgba(255,255,255,.2); }*/
-/*a.enter:active { background: white; }*/
-
 input.buttonEnter {
     display: inline-block;
     width: 6em;
@@ -427,7 +376,6 @@ input.buttonAssignBook {
     border-color: #5cea9a #3ad95a #3ad95a #5cea9a;
     border-radius: 6px;
     outline: none;
-
     background: #60d88a linear-gradient(#89e2a8, #60d886 50%, #37ce62);
     box-shadow: inset rgba(255, 255, 255, .5) 1px 1px;
 }
@@ -462,7 +410,6 @@ input.buttonBooking {
     border-color: #5cea9a #3ad95a #3ad95a #5cea9a;
     border-radius: 6px;
     outline: none;
-
     background: #60d88a linear-gradient(#89e2a8, #60d886 50%, #37ce62);
     box-shadow: inset rgba(255, 255, 255, .5) 1px 1px;
 }

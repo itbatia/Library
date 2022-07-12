@@ -27,27 +27,36 @@
                 <p>Введите данные для создания аккаунта:</p>
 
                 <input type="text" placeholder="Фамилия" th:field="*{lastName}" id="lastName"/>
-                <div style="color:red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">LastName Error</div>
+                <div style="color:red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">LastName Error
+                </div>
                 <br/>
 
                 <input type="text" placeholder="Имя" th:field="*{firstName}" id="firstName"/>
-                <div style="color:red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">FirstName Error</div>
+                <div style="color:red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">FirstName
+                    Error
+                </div>
                 <br/>
 
                 <input type="text" placeholder="Отчество" th:field="*{patronymic}" id="patronymic"/>
-                <div style="color:red" th:if="${#fields.hasErrors('patronymic')}" th:errors="*{patronymic}">Patronymic Error</div>
+                <div style="color:red" th:if="${#fields.hasErrors('patronymic')}" th:errors="*{patronymic}">Patronymic
+                    Error
+                </div>
                 <br/>
 
                 <input type="text" placeholder="Год рождения" th:field="*{yearOfBirth}" id="yearOfBirth"/>
-                <div style="color:red" th:if="${#fields.hasErrors('yearOfBirth')}" th:errors="*{yearOfBirth}">YearOfBirth Error</div>
+                <div style="color:red" th:if="${#fields.hasErrors('yearOfBirth')}" th:errors="*{yearOfBirth}">
+                    YearOfBirth Error
+                </div>
                 <br/>
 
                 <input type="text" placeholder="Username" th:field="*{username}" id="username"/>
-                <div style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</div>
+                <div style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error
+                </div>
                 <br/>
 
                 <input type="password" placeholder="Password" th:field="*{password}" id="password"/>
-                <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</div>
+                <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error
+                </div>
                 <br/>
 
                 <label for="roles">Роль*: </label>
@@ -68,61 +77,3 @@
 
 </body>
 </html>
-
-
-<!--<!DOCTYPE html>-->
-<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Registration</title>-->
-<!--</head>-->
-<!--<body>-->
-
-<!--&lt;!&ndash;/*@thymesVar id="person" type="com.itbatia.app.dto.PersonToRegisterDTO"*/&ndash;&gt;-->
-<!--<form th:method="POST" th:action="@{/auth/registration}" th:object="${person}">-->
-
-<!--    <p>Введите данные для создания аккаунта:</p>-->
-
-<!--    <label for="firstName">Имя: </label>-->
-<!--    <input type="text" th:field="*{firstName}" id="firstName"/>-->
-<!--    <div style="color:red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">FirstName Error</div>-->
-<!--    <br/>-->
-<!--    <label for="lastName">Фамилия: </label>-->
-<!--    <input type="text" th:field="*{lastName}" id="lastName"/>-->
-<!--    <div style="color:red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">LastName Error</div>-->
-<!--    <br/>-->
-<!--    <label for="patronymic">Отчество: </label>-->
-<!--    <input type="text" th:field="*{patronymic}" id="patronymic"/>-->
-<!--    <div style="color:red" th:if="${#fields.hasErrors('patronymic')}" th:errors="*{patronymic}">Patronymic Error</div>-->
-<!--    <br/>-->
-
-<!--    <label for="yearOfBirth">Год рождения: </label>-->
-<!--    <input type="text" th:field="*{yearOfBirth}" id="yearOfBirth"/>-->
-<!--    <div style="color:red" th:if="${#fields.hasErrors('yearOfBirth')}" th:errors="*{yearOfBirth}">YearOfBirth Error-->
-<!--    </div>-->
-<!--    <br/>-->
-
-<!--    <label for="username">Логин: </label>-->
-<!--    <input type="text" th:field="*{username}" id="username"/>-->
-<!--    <div style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</div>-->
-<!--    <br/>-->
-<!--    <label for="password">Пароль: </label>-->
-<!--    <input type="password" th:field="*{password}" id="password"/>-->
-<!--    <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</div>-->
-<!--    <br/>-->
-
-<!--    <label for="roles">Роль*: </label>-->
-<!--    <select id="roles" th:field="*{role}">-->
-<!--        <option value="USER" th:text="user"/>-->
-<!--        <option value="LIBRARIAN" th:text="librarian"/>-->
-<!--        <option value="ADMIN" th:text="admin"/>-->
-<!--    </select>-->
-<!--    <br/><br/>-->
-
-<!--    <input type="submit" value="Зарегистрироваться"/>-->
-<!--</form>-->
-<!--<br/>-->
-<!--<p>* Функция по выбору роли на этапе регистрации сделана только для удобства тестирования приложения.</p>-->
-
-<!--</body>-->
-<!--</html>-->

@@ -67,7 +67,7 @@ public class PersonMapper {
         return personDTO;
     }
 
-    public Person convertToPerson (PersonToUpdateYourselfDTO personToUpdateYourselfDTO){
+    public Person convertToPerson(PersonToUpdateYourselfDTO personToUpdateYourselfDTO) {
         Person person = new Person();
 
         String fullName = personToUpdateYourselfDTO.getLastName() + " " +
@@ -83,7 +83,7 @@ public class PersonMapper {
         return person;
     }
 
-    public Person convertToPerson (PersonToUpdateDTO personToUpdateDTO){
+    public Person convertToPerson(PersonToUpdateDTO personToUpdateDTO) {
         Person person = new Person();
 
         String fullName = personToUpdateDTO.getLastName() + " " +

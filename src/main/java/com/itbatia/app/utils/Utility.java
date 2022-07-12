@@ -51,6 +51,7 @@ public class Utility {
         return dateOfReserve.format(formatter);
     }
 
+    // Автономное обновление брОни книг и возможности бронировать книги на сайте у пользователей
     @PostConstruct
     public void updateBooking() {
         new Thread(new Runnable() {

@@ -37,7 +37,6 @@
                 <div style="color:limegreen" th:if="${book.getReservedUntil()!=null}">
 
                     <span>Эта книга забронирована вами до </span>
-                    <!--        <span th:text="${book.getReservedUntil()}">VALUE</span>-->
 
                     <span th:text="${reservedUntilFormatList.get(book.getId())}">VALUE</span>
                     <form th:method="PATCH" th:action="@{/user/{id}/removeReserve(id=${book.getId()})}">
@@ -64,39 +63,6 @@
     </div>
 
 </div>
-
-
-<!--/*@thymesVar id="books" type="com.itbatia.app.dto.BookDTO"*/-->
-<!--<div th:each="book : ${books}">-->
-
-<!--    <span th:text="'Название : ' + ${book.getTitle()}">VALUE</span><br/>-->
-<!--    <span th:text="'Автор: ' + ${book.getAuthor()}">VALUE</span><br/>-->
-<!--    <span th:text="'Жанр: ' + ${book.getGenre().getGenreTitle()}">VALUE</span><br/>-->
-
-<!--    <div style="color:limegreen" th:if="${book.getReservedUntil()!=null}">-->
-
-<!--        <span>Эта книга забронирована вами до </span>-->
-<!--&lt;!&ndash;        <span th:text="${book.getReservedUntil()}">VALUE</span>&ndash;&gt;-->
-
-<!--        <span th:text="${reservedUntilFormatList.get(book.getId())}">VALUE</span>-->
-<!--        <form th:method="PATCH" th:action="@{/user/{id}/removeReserve(id=${book.getId()})}">-->
-<!--            <input type="submit" value="Снять бронь">-->
-<!--        </form>-->
-<!--        <br/>-->
-<!--    </div>-->
-
-<!--    <div style="color:limegreen" th:if="${book.getTakenAt()!=null}">-->
-
-<!--        <span>Вы взяли эту книгу в библиотеке </span>-->
-<!--        <span th:text="${book.getTakenAt()}">VALUE</span>-->
-<!--        <br/><br/>-->
-<!--    </div>-->
-
-<!--</div>-->
-
-<!--<form th:method="GET" th:action="@{/user/showAccount}">-->
-<!--    <input type="submit" value="Вернуться в личный кабинет">-->
-<!--</form>-->
 
 </body>
 </html>

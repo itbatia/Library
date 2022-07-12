@@ -55,13 +55,6 @@
         </table>
         <br/>
 
-<!--        &lt;!&ndash;/*@thymesVar id="person" type="com.itbatia.app.dto.PersonDTO"*/&ndash;&gt;-->
-<!--        <span th:text="'Полное имя : ' + ${person.getFullName()}">VALUE</span><br/>-->
-<!--        <span th:text="'Год рождения: ' + ${person.getYearOfBirth()}">VALUE</span><br/>-->
-<!--        <span th:text="'Возможность бронировать книги на сайте: ' + ${person.getBooking()}">VALUE</span><br/>-->
-<!--        <span th:text="'Дата создания аккаунта: ' + ${person.getCreatedAt()}">VALUE</span>-->
-<!--        <br/><br/>-->
-
         <div th:if="${books.isEmpty()}">
             <p style="color: blueviolet">Человек пока не взял ни одной книги</p>
         </div>

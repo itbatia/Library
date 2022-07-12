@@ -19,12 +19,15 @@ public enum Genre {
     ENCYCLOPEDIA("Энциклопедия"),
     ANTHOLOGY("Антология"),
     FANTASY("Фэнтези"),
-    MYSTIC("Мистика");
+    PSYCHOLOGY("Психология"),
+    MYSTIC("Мистика"),
+    PHILOSOPHY("Философия"),
+    SAGA("Сага");
 
     private final String genreTitle;
 
     Genre(String genreTitle) {
-        this.genreTitle=genreTitle;
+        this.genreTitle = genreTitle;
     }
 
     public String getGenreTitle() {
