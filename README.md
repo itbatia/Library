@@ -62,4 +62,4 @@
 |   11. Информация о пользователе и его книгах. Вид из кабинета библиотекаря:   |
 |                ![](readme-screen/User_info_from_librarian.jpg)                |
 |      12. Информация о пользователе и его книгах. Вид из кабинета админа:      |
-|                ![](readme-screen/User_info_from_librarian.jpg)                |
+|                  ![](readme-screen/User_info_from_admin.jpg)                  |
