@@ -81,7 +81,7 @@ public class UserController {
     @PatchMapping("/{id}/removeReserve")
     public String removeReserve(@PathVariable("id") int id) {
         bookService.removeReserve(id);
-        return "redirect:/user/books";
+        return "redirect:/user/myBooks";
     }
 
     private BookDTO convertToBookDTO(Book book) {

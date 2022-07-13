@@ -42,9 +42,6 @@ public class Book {
     @Column(name = "reserved_until")
     private LocalDateTime reservedUntil;
 
-//    @Transient
-//    private boolean reserveTimeExpired;
-
     @Column(name = "taken_at")
     @Temporal(TemporalType.DATE)
     private Date takenAt;

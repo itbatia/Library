@@ -1,28 +1,28 @@
 package com.itbatia.app.models;
 
 public enum Genre {
-    HISTORY("История"),
-    THRILLER("Триллер"),
-    DETECTIVE("Детектив"),
-    CLASSIC("Классика"),
-    SCIENCE("Наука"),
-    NOVEL("Роман"),
-    SATIRE("Комедия"),
-    HORROR("Ужасы"),
-    RELIGIOUS("Религия"),
+    ANTHOLOGY("Антология"),
+    BUSINESS("Бизнес"),
     ACTION("Боевик"),
+    DETECTIVE("Детектив"),
     HEALTH("Здоровье"),
     ART("Искусство"),
-    BUSINESS("Бизнес"),
+    HISTORY("История"),
+    CLASSIC("Классика"),
+    SATIRE("Комедия"),
+    MYSTIC("Мистика"),
+    SCIENCE("Наука"),
+    PSYCHOLOGY("Психология"),
+    NOVEL("Роман"),
+    RELIGIOUS("Религия"),
+    SAGA("Сага"),
     CHILDREN("Сказка"),
     DICTIONARY("Словарь"),
-    ENCYCLOPEDIA("Энциклопедия"),
-    ANTHOLOGY("Антология"),
+    THRILLER("Триллер"),
+    HORROR("Ужасы"),
     FANTASY("Фэнтези"),
-    PSYCHOLOGY("Психология"),
-    MYSTIC("Мистика"),
     PHILOSOPHY("Философия"),
-    SAGA("Сага");
+    ENCYCLOPEDIA("Энциклопедия");
 
     private final String genreTitle;
 
