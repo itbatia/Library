@@ -39,15 +39,17 @@
 |                            Изменять роли                             |  -   |     -     |   +   |
 
 
-|                             ***Дополнение:***                             |
-|:-------------------------------------------------------------------------:|
-| Настроена __регистрация, аутентификация__ и __авторизация__ пользователей |
-|                         ![](readme-screen/1.jpg)                          |
-|                       Пагинация и сортировка книг:                        |
-|                         ![](readme-screen/2.jpg)                          |
-|                           Поиск книг на сайте:                            |
-|                         ![](readme-screen/3.jpg)                          |
-|     Валидация данных - __Hibernate validator__ и __Spring validator__     |
-|                         ![](readme-screen/4.jpg)                          |
-|             Шифрование паролей - __BCrypt__ password encoder              |
-|                         ![](readme-screen/5.jpg)                          |
+|                             ***Дополнение:***                              |
+|:--------------------------------------------------------------------------:|
+| Настроена __регистрация, аутентификация__ и __авторизация__ пользователей: |
+|                      ![](readme-screen/Reg_form.jpg)                       |
+|                        Пагинация и сортировка книг:                        |
+|                      ![](readme-screen/All_books.jpg)                      |
+|             Поиск книг на сайте. Вид из кабинета библиотекаря:             |
+|                    ![](readme-screen/Search_from_librarian.jpg)                     |
+|             Поиск книг на сайте. Вид из кабинета пользователя:             |
+|                     ![](readme-screen/Search_from_user.jpg)                     |
+|     Валидация данных - __Hibernate validator__ и __Spring validator__      |
+|                      ![](readme-screen/Validator.jpg)                      |
+|              Шифрование паролей - __BCrypt__ password encoder              |
+|                       ![](readme-screen/BCrypt.jpg)                        |
