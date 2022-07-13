@@ -6,7 +6,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.7.0</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
     <groupId>com.itbatia.app</groupId>
     <artifactId>SpringBootSecurityLibrary</artifactId>
@@ -15,14 +15,12 @@
     <description>SpringBootSecurityLibrary</description>
 
     <properties>
-        <!-- Добавил настройки плагина сборки -->
         <java.version>17</java.version>
+        <!-- Добавил настройки плагина сборки -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-
-        <!-- <java.version>17</java.version> -->
     </properties>
     <dependencies>
         <dependency>
@@ -94,7 +92,8 @@
 
     <build>
         <plugins>
-            <!-- Убрал plugin штатный плагин Спринга -->
+
+            <!-- Убрал штатный плагин Спринга -->
 <!--            <plugin>-->
 <!--                <groupId>org.springframework.boot</groupId>-->
 <!--                <artifactId>spring-boot-maven-plugin</artifactId>-->

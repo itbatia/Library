@@ -27,6 +27,6 @@
 }
 .scrollableForEditPerson {
     overflow: auto; /* Добавляем полосы прокрутки только при необходимости */
-    height: 355px; /* Высота блока */
+    height: 375px; /* Высота блока */
     padding: 5px; /* Поля вокруг текста */
 }
