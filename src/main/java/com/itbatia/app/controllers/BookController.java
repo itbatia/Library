@@ -83,7 +83,7 @@ public class BookController {
 
     @GetMapping("/new")
     public String newBook(@ModelAttribute("book") BookDTO bookDTO) {
-        return "/books/new";
+        return "books/new";
     }
 
     @PostMapping("/new")
