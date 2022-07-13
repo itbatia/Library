@@ -50,7 +50,7 @@ public class BookController {
                               @RequestParam(value = "size", required = false) Integer size,
                               Model model) {
         model.addAttribute("books", bookService.getAllBooks(sorter, page, size)
-                .stream().map(this::convertToBookDTO).collect(Collectors.toList()));
+                .stream().map(this::convertToBookDTO).toList());
         return "books/allBooks";
     }
 

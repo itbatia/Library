@@ -41,7 +41,12 @@
     </div>
 
     <div th:class="blockThree">
-
+        <span th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+            <br/>На заметку.<br/><br/>На сайте можно найти и забронировать нужную книгу.<br/>
+            Затем в библиотеке получить её на руки.<br/><br/>
+            Бронируются книги ровно на <span style="color: red">24 часа</span>.<br/><br/>
+            Взять книгу на руки из библиотеки можно сроком до <span style="color: red">10 дней</span>!
+        </span>
     </div>
 
 </div>
