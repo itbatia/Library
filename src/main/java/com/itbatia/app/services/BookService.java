@@ -119,8 +119,7 @@ public class BookService {
     public void makeReservation(int id, Person selectedPerson) {
         bookRepository.findById(id).ifPresent(book -> {
             book.setOwner(selectedPerson);
-//            book.setReservedUntil(LocalDateTime.now().plusDays(1).plusHours(3));
-            book.setReservedUntil(LocalDateTime.now(ZoneId.of("Europe/Minsk")));
+            book.setReservedUntil(LocalDateTime.now(ZoneId.of("Europe/Minsk")).plusDays(1));
         });
     }
 

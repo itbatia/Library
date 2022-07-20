@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
@@ -59,7 +60,7 @@ public class Utility {
             public void run() {
                 while (true) {
                     bookService.getByReservedUntilNotNull().forEach(book -> {
-                        if (book.getReservedUntil().isBefore(LocalDateTime.now())) {
+                        if (book.getReservedUntil().isBefore(LocalDateTime.now(ZoneId.of("Europe/Minsk")))) {
                             personService.updateBookingForPerson(book.getOwner().getId());
                             bookService.updateReserveUntilAndOwner(book.getId());
                         }
