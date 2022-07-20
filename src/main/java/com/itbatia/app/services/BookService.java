@@ -120,7 +120,7 @@ public class BookService {
         bookRepository.findById(id).ifPresent(book -> {
             book.setOwner(selectedPerson);
 //            book.setReservedUntil(LocalDateTime.now().plusDays(1).plusHours(3));
-            book.setReservedUntil(LocalDateTime.now(ZoneId.of("UTC")));
+            book.setReservedUntil(LocalDateTime.now(ZoneId.of("Europe/Minsk")));
         });
     }
 
