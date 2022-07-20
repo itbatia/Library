@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -117,7 +118,8 @@ public class BookService {
     public void makeReservation(int id, Person selectedPerson) {
         bookRepository.findById(id).ifPresent(book -> {
             book.setOwner(selectedPerson);
-            book.setReservedUntil(LocalDateTime.now().plusDays(1));
+//            book.setReservedUntil(LocalDateTime.now().plusDays(1));
+            book.setReservedUntil(LocalDateTime.from(ZonedDateTime.now()).plusDays(1));
         });
     }
 
