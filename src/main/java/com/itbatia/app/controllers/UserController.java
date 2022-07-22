@@ -43,18 +43,18 @@ public class UserController {
         this.utility = utility;
     }
 
-    @GetMapping("/showAccount")
+    @GetMapping("/show_account")
     public String showAccount() {
-        return "user/showAccount";
+        return "user/show_account";
     }
 
-    @GetMapping("/editAccount")
+    @GetMapping("/edit_account")
     public String editAccount(Model model) {
         model.addAttribute("person", personMapper.convertToPersonToUpdateYourselfDTO(utility.getUserFromContext()));
-        return "user/editAccount";
+        return "user/edit_account";
     }
 
-    @PatchMapping("/editAccount")
+    @PatchMapping("/edit_account")
     public String updateAccount(@ModelAttribute("person") @Valid PersonToUpdateYourselfDTO personToUpdateYourselfDTO,
                                 BindingResult bindingResult) {
         Person personToUpdate = personMapper.convertToPerson(personToUpdateYourselfDTO);
@@ -62,26 +62,26 @@ public class UserController {
         personValidator.validate(personToUpdate, bindingResult);
 
         if (bindingResult.hasErrors())
-            return "user/editAccount";
+            return "user/edit_account";
 
         personService.updateAccount(personToUpdate);
-        return "redirect:/user/showAccount";
+        return "redirect:/user/show_account";
     }
 
-    @GetMapping("/myBooks")
+    @GetMapping("/my_books")
     public String getUserBooks(Model model) {
         List<Book> userBooks = utility.getUserFromContext().getBooks();
 
         model.addAttribute("books", userBooks.stream().map(this::convertToBookDTO).collect(Collectors.toList()));
         model.addAttribute("reservedUntilFormatList", utility.getReservedUntilFormatList(userBooks));
 
-        return "user/myBooks";
+        return "user/my_books";
     }
 
-    @PatchMapping("/{id}/removeReserve")
+    @PatchMapping("/{id}/remove_reserve")
     public String removeReserve(@PathVariable("id") int id) {
         bookService.removeReserve(id);
-        return "redirect:/user/myBooks";
+        return "redirect:/user/my_books";
     }
 
     private BookDTO convertToBookDTO(Book book) {

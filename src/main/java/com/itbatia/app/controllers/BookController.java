@@ -51,7 +51,7 @@ public class BookController {
                               Model model) {
         model.addAttribute("books", bookService.getAllBooks(sorter, page, size)
                 .stream().map(this::convertToBookDTO).toList());
-        return "books/allBooks";
+        return "books/all_books";
     }
 
     @GetMapping("/{id}")
@@ -144,7 +144,7 @@ public class BookController {
         return "redirect:/books/" + id;
     }
 
-    @PatchMapping("/{id}/removeReserve")
+    @PatchMapping("/{id}/remove_reserve")
     public String removeReserve(@PathVariable("id") int id) {
         bookService.removeReserve(id);
         return "redirect:/books/" + id;
@@ -169,6 +169,26 @@ public class BookController {
         model.addAttribute("currentUser", utility.getUserFromContext());
 
         return "books/search";
+    }
+
+    @GetMapping("/report")
+    public String report(Model model) {
+        model.addAttribute("report", bookService.report());
+        return "books/report";
+    }
+
+    @GetMapping("/report/{number}")
+    public String getPartBooksForReport(@PathVariable("number") Integer number, Model model) {
+        model.addAttribute("books", bookService.partBooksForReport(number)
+                .stream().map(this::convertToBookDTO).toList());
+        model.addAttribute("number", number);
+        return "books/books_for_report";
+    }
+
+    @GetMapping("/free_books")
+    public String getFreeBooks(Model model) {
+        model.addAttribute("books", bookService.freeBooks().stream().map(this::convertToBookDTO).toList());
+        return "books/free_books";
     }
 
     private Book convertToBook(BookDTO bookDTO) {

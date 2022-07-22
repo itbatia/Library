@@ -10,11 +10,15 @@ import java.util.Optional;
 @Repository
 public interface BookRepository extends JpaRepository<Book, Integer> {
 
-    Optional<Book> findByTitleAndAuthor(String title, String author);
+    Optional<Book> findAllByTitleAndAuthor(String title, String author);
 
-    List<Book> findByTitleStartingWith(String query);
+    List<Book> findAllByTitleStartingWith(String query);
 
-    List<Book> findByAuthorStartingWith(String query);
+    List<Book> findAllByAuthorStartingWith(String query);
 
-    List<Book> findByReservedUntilNotNull();
+    List<Book> findAllByTakenAtNotNull();
+
+    List<Book> findAllByReservedUntilNotNull();
+
+    List<Book> findAllByOwnerNull();
 }

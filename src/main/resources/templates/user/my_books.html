@@ -13,7 +13,7 @@
 <div th:class="blockMain">
 
     <div th:class="blockOne">
-        <form th:method="GET" th:action="@{/user/showAccount}">
+        <form th:method="GET" th:action="@{/user/show_account}">
             <input th:class="buttonBack" type="submit" value="Назад">
         </form>
     </div>
@@ -39,7 +39,7 @@
                     <span>Эта книга забронирована вами до </span>
 
                     <span th:text="${reservedUntilFormatList.get(book.getId())}">VALUE</span>
-                    <form th:method="PATCH" th:action="@{/user/{id}/removeReserve(id=${book.getId()})}">
+                    <form th:method="PATCH" th:action="@{/user/{id}/remove_reserve(id=${book.getId()})}">
                         <input th:class="buttonRelease" type="submit" value="Снять бронь">
                     </form>
                     <br/>

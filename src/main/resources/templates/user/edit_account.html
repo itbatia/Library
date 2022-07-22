@@ -16,7 +16,7 @@
         <form th:action="@{/logout}" th:method="POST">
             <input th:class="buttonExit" type="submit" value="Выход">
         </form>
-        <form th:method="GET" th:action="@{/user/showAccount}">
+        <form th:method="GET" th:action="@{/user/show_account}">
             <input th:class="buttonBack" type="submit" value="Назад">
         </form>
     </div>
@@ -27,7 +27,7 @@
         <section th:class="scrollableForEdit" id="content">
 
             <!--/*@thymesVar id="person" type="com.itbatia.app.dto.PersonToUpdateYourselfDTO"*/-->
-            <form th:method="PATCH" th:action="@{/user/editAccount}" th:object="${person}">
+            <form th:method="PATCH" th:action="@{/user/edit_account}" th:object="${person}">
                 <h1>Edit Form</h1>
                 <p>Укажите новые данные при необходимости:</p>
 

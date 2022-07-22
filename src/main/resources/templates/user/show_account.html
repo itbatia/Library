@@ -29,12 +29,12 @@
         </div>
 
         <div th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
-            <form th:method="GET" th:action="@{/user/myBooks}">
+            <form th:method="GET" th:action="@{/user/my_books}">
                 <input th:class="buttonNavi" type="submit" value="Мои книги">
             </form>
         </div>
 
-        <form th:action="@{/user/editAccount}" th:method="GET">
+        <form th:action="@{/user/edit_account}" th:method="GET">
             <input th:class="buttonNavi" type="submit" value="Перейти к редактированию профиля">
         </form>
 

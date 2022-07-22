@@ -2,6 +2,7 @@ package com.itbatia.app.services;
 
 import com.itbatia.app.models.Book;
 import com.itbatia.app.models.Person;
+import com.itbatia.app.repositories.BookRepository;
 import com.itbatia.app.repositories.PersonRepository;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Transactional(readOnly = true)
@@ -21,11 +19,15 @@ public class PersonService {
 
     private final PersonRepository personRepository;
     private final PasswordEncoder passwordEncoder;
+    private final BookRepository bookRepository;
 
     @Autowired
-    public PersonService(PersonRepository personRepository, PasswordEncoder passwordEncoder) {
+    public PersonService(PersonRepository personRepository,
+                         PasswordEncoder passwordEncoder,
+                         BookRepository bookRepository) {
         this.personRepository = personRepository;
         this.passwordEncoder = passwordEncoder;
+        this.bookRepository = bookRepository;
     }
 
     public List<Person> findAllByRole(String role) {
@@ -126,5 +128,48 @@ public class PersonService {
         if (!query.isEmpty())
             return personRepository.findByFullNameStartingWith(query);
         return Collections.emptyList();
+    }
+
+    //Для отчёта
+    public Map<String, Integer> report() {
+        List<Person> people = personRepository.findAll();
+
+        if (!people.isEmpty()) {
+            Map<String, Integer> report = new LinkedHashMap<>();
+
+            report.put("Всего зарегистрировано пользователей: ", personRepository.findAll().size());
+            report.put("Из них взяли книги на руки: ", peopleWithBooksOnHand().size());
+            report.put("Забронировали книги на сайте: ", peopleWithReservedBooks().size());
+            report.put("Потеряли возможность бронировать книги на сайте: ", peopleWithBookingFalse().size());
+
+            return report;
+        } else return Collections.emptyMap();
+    }
+
+    public List<Person> getPeopleForReport(int number) {
+        if (number == 1) return peopleWithBooksOnHand();
+        if (number == 2) return peopleWithReservedBooks();
+        if (number == 3) return peopleWithBookingFalse();
+        return Collections.emptyList();
+    }
+
+    private List<Person> peopleWithBooksOnHand(){
+        return booksOnHand().stream().map(Book::getOwner).toList();
+    }
+
+    private List<Person> peopleWithReservedBooks(){
+        return reservedBooks().stream().map(Book::getOwner).toList();
+    }
+
+    private List<Person> peopleWithBookingFalse(){
+        return personRepository.findAllByBookingFalse();
+    }
+
+    private List<Book> booksOnHand() {
+        return bookRepository.findAllByTakenAtNotNull();
+    }
+
+    private List<Book> reservedBooks() {
+        return bookRepository.findAllByReservedUntilNotNull();
     }
 }

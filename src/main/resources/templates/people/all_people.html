@@ -16,7 +16,7 @@
         <form th:action="@{/logout}" th:method="POST">
             <input th:class="buttonExit" type="submit" value="Выход">
         </form>
-        <form th:method="GET" th:action="@{/user/showAccount}">
+        <form th:method="GET" th:action="@{/user/show_account}">
             <input th:class="buttonBackToBooks" type="submit" value="Вернуться в личный кабинет">
         </form>
     </div>
@@ -27,6 +27,9 @@
         </form>
         <form th:method="GET" th:action="@{/books}">
             <input th:class="buttonNavi" type="submit" value="Перейти к списку книг">
+        </form>
+        <form th:method="GET" th:action="@{/people/report}">
+            <input th:class="buttonNavi" type="submit" value="Отчёт по пользователям">
         </form>
     </div>
 

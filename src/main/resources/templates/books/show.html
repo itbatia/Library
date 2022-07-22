@@ -77,7 +77,7 @@
                     <span style="color:blueviolet">до </span>
                     <span style="color:blueviolet" th:text="${reserveTime}">VALUE</span>
 
-                    <form th:method="PATCH" th:action="@{/books/{id}/removeReserve(id=${book.getId()})}">
+                    <form th:method="PATCH" th:action="@{/books/{id}/remove_reserve(id=${book.getId()})}">
                         <input th:class="buttonReleaseBook2" type="submit" value="Снять бронь"/>
                     </form>
                 </div>
@@ -110,7 +110,7 @@
                 <div style="color:limegreen" th:if="${currentUser!=null}">
                     <span>Эта книга забронирована вами до </span>
                     <span th:text="${reserveTime}">VALUE</span>
-                    <form th:method="PATCH" th:action="@{/books/{id}/removeReserve(id=${book.getId()})}">
+                    <form th:method="PATCH" th:action="@{/books/{id}/remove_reserve(id=${book.getId()})}">
                         <input th:class="buttonRelease" type="submit" value="Снять бронь">
                     </form>
                 </div>

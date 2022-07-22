@@ -18,7 +18,7 @@
             <input th:class="buttonExit" type="submit" value="Выход">
         </form>
 
-        <form th:method="GET" th:action="@{/user/showAccount}">
+        <form th:method="GET" th:action="@{/user/show_account}">
             <input th:class="buttonBackToBooks" type="submit" value="Вернуться в личный кабинет">
         </form>
     </div>
@@ -59,9 +59,21 @@
 
             </form>
 
+            <div th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+                <form th:method="GET" th:action="@{/books/free_books}">
+                    <input th:class="buttonNavi" type="submit" value="Показать только свободные книги">
+                </form>
+            </div>
+
             <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') or hasRole(''ROLE_LIBRARIAN'')')}">
                 <form th:method="GET" th:action="@{/people}">
                     <input th:class="buttonNavi" type="submit" value="Перейти к списку пользователей">
+                </form>
+            </div>
+
+            <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') or hasRole(''ROLE_LIBRARIAN'')')}">
+                <form th:method="GET" th:action="@{/books/report}">
+                    <input th:class="buttonNavi" type="submit" value="Отчёт по книгам">
                 </form>
             </div>
 

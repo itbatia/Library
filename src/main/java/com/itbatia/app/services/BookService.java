@@ -12,11 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Transactional(readOnly = true)
@@ -50,11 +46,11 @@ public class BookService {
 
     //Для валидатора
     public Optional<Book> findByTitleAndAuthor(Book book) {
-        return bookRepository.findByTitleAndAuthor(book.getTitle(), book.getAuthor());
+        return bookRepository.findAllByTitleAndAuthor(book.getTitle(), book.getAuthor());
     }
 
     public List<Book> getByReservedUntilNotNull() {
-        return bookRepository.findByReservedUntilNotNull();
+        return bookRepository.findAllByReservedUntilNotNull();
     }
 
     @Transactional
@@ -122,6 +118,9 @@ public class BookService {
             book.setReservedUntil(LocalDateTime.now(ZoneId.of("Europe/Minsk")).plusDays(1));
         });
     }
+    // Heroku использует GMT (Среднее Время По Гринвичу). GMT + 3ч = время в Минске,
+    // поэтому внёс корректировку часового пояса.
+
 
     // Этот метод вызывается, когда пользователь или библиотекарь снимает бронь с книги
     @Transactional
@@ -134,16 +133,89 @@ public class BookService {
 
     //Поиск книги по первой букве(ам) в названии:
     public List<Book> findByTitleStartingWith(String query) {
-        if (!query.isEmpty())
-            return bookRepository.findByTitleStartingWith(query);
+        if (!query.isEmpty()) {
+            List<String> wordsOfQuery = queryEditing(query);
+            if (wordsOfQuery.size()==1) {
+                return bookRepository.findAllByTitleStartingWith(wordsOfQuery.get(0));
+            } else {
+                List<Book> resultList = bookRepository.findAllByTitleStartingWith(wordsOfQuery.get(0));
+                resultList.addAll(bookRepository.findAllByTitleStartingWith(wordsOfQuery.get(1)));
+                return resultList.stream().distinct().toList();
+            }
+        }
         return Collections.emptyList();
     }
 
     //Поиск книги по первой букве(ам) имени автора:
     public List<Book> findByAuthorStartingWith(String query) {
-        if (!query.isEmpty())
-            return bookRepository.findByAuthorStartingWith(query);
+        if (!query.isEmpty()) {
+            List<String> wordsOfQuery = queryEditing(query);
+            if (wordsOfQuery.size()==1) {
+                return bookRepository.findAllByAuthorStartingWith(wordsOfQuery.get(0));
+            } else {
+                List<Book> resultList = bookRepository.findAllByAuthorStartingWith(wordsOfQuery.get(0));
+                resultList.addAll(bookRepository.findAllByAuthorStartingWith(wordsOfQuery.get(1)));
+                return resultList.stream().distinct().toList();
+            }
+        }
         return Collections.emptyList();
+    }
+
+    private List<String> queryEditing(String userQuery) {
+        List<String> wordsOfQuery = new ArrayList<>();
+        String query = userQuery.strip();
+
+        if (query.contains(" ")) {
+            String[] array = query.split(" ");
+            wordsOfQuery.add(queryEditingInternal(array[0]));
+            wordsOfQuery.add(queryEditingInternal(array[1]));
+        } else {
+            wordsOfQuery.add(queryEditingInternal(query));
+        }
+        return wordsOfQuery;
+    }
+
+    private String queryEditingInternal(String query) {
+        return query.substring(0, 1).toUpperCase().concat(query.substring(1));
+    }
+
+    //Для отчёта
+    public Map<String, Integer> report() {
+        List<Book> books = bookRepository.findAll();
+
+        if (!books.isEmpty()) {
+            Map<String, Integer> report = new LinkedHashMap<>();
+
+            int booksInHand = 0;
+            int booksReserved = 0;
+            int booksFreely = 0;
+
+            for (Book book : books) {
+                if (book.getOwner() == null) {
+                    booksFreely++;
+                } else if (book.getTakenAt() != null) {
+                    booksInHand++;
+                } else booksReserved++;
+            }
+
+            report.put("Всего книг в библиотеке: ", books.size());
+            report.put("Из них на руках: ", booksInHand);
+            report.put("Забронировано: ", booksReserved);
+            report.put("Свободно: ", booksFreely);
+            return report;
+
+        } else return Collections.emptyMap();
+    }
+
+    public List<Book> partBooksForReport(int number) {
+        if (number == 1) return bookRepository.findAllByOwnerNull();
+        if (number == 2) return bookRepository.findAllByTakenAtNotNull();
+        if (number == 3) return bookRepository.findAllByReservedUntilNotNull();
+        return Collections.emptyList();
+    }
+
+    public List<Book> freeBooks(){
+        return bookRepository.findAllByOwnerNull();
     }
 }
 

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список книг для отчёта</title>
+    <link rel="stylesheet" th:href="@{/css/blocks.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/buttons.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/page-titles.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/scrollable-list.css}" type="text/css"/>
+</head>
+<body>
+
+<div th:class="blockMain">
+
+    <div th:class="blockOne">
+        <form th:method="GET" th:action="@{/books/report}">
+            <input th:class="buttonBack" type="submit" value="Назад">
+        </form>
+    </div>
+
+    <div th:class="blockTwo"></div>
+
+    <div th:class="blockThree">
+
+        <h2 th:if="${number==1}" th:class="pageTitle">Список свободных книг</h2>
+        <h2 th:if="${number==2}" th:class="pageTitle">Книги на руках пользователей</h2>
+        <h2 th:if="${number==3}" th:class="pageTitle">Список забронированных книг</h2>
+
+        <div th:class="scrollableList">
+
+            <table th:if="${!books.isEmpty()}">
+                <tr>
+                    <th></th>
+                    <th>Название</th>
+                    <th>Автор</th>
+                    <th>Жанр</th>
+                </tr>
+                <tr th:each="book : ${books}">
+                    <td><img src=/images/book.png height="14" alt="Books"></td>
+                    <td>
+                        <a th:href="@{/books/{id}(id=${book.getId()})}"
+                           th:text="${book.getTitle()}">Title</a>
+                    </td>
+                    <td th:text="${book.getAuthor()}">Author</td>
+                    <td th:text="${book.getGenre().getGenreTitle()}">Genre</td>
+                </tr>
+            </table>
+
+            <div th:if="${books.isEmpty()}">
+                <span th:if="${number==1}">В данный момент все книги забронированы<br/>или взяты на руки пользователями</span>
+                <span th:if="${number==2}">В данный момент все книги в библиотеке</span>
+                <span th:if="${number==3}">В данный момент нет ни одной забронированной книги</span>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

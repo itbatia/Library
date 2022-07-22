@@ -40,7 +40,7 @@ public class PeopleController {
         model.addAttribute("people", personService.findAllByRole("ROLE_USER")
                 .stream().map(personMapper::convertToPersonDTO).toList());
 
-        return "people/allPeople";
+        return "people/all_people";
     }
 
     @GetMapping("/{id}")
@@ -89,6 +89,20 @@ public class PeopleController {
                 .stream().map(personMapper::convertToPersonDTO).toList());
 
         return "people/search";
+    }
+
+    @GetMapping("/report")
+    public String report(Model model) {
+        model.addAttribute("report", personService.report());
+        return "people/report";
+    }
+
+    @GetMapping("/report/{number}")
+    public String getPeopleForReport(@PathVariable("number") Integer number, Model model) {
+        model.addAttribute("people", personService.getPeopleForReport(number)
+                .stream().map(personMapper::convertToPersonDTO).toList());
+        model.addAttribute("number", number);
+        return "people/people_for_report";
     }
 
     private BookDTO convertToBookDTO(Book book) {

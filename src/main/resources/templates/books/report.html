@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Отчёт по книгам</title>
+    <link rel="stylesheet" th:href="@{/css/blocks.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/buttons.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/page-titles.css}" type="text/css"/>
+</head>
+<body>
+
+<div th:class="blockMain">
+
+    <div th:class="blockOne">
+        <form th:action="@{/logout}" th:method="POST">
+            <input th:class="buttonExit" type="submit" value="Выход">
+        </form>
+
+        <form th:method="GET" th:action="@{/books}">
+            <input th:class="buttonBackToBooks" type="submit" value="Вернуться к списку всех книг">
+        </form>
+    </div>
+
+    <div th:class="blockTwo">
+        <form th:method="GET" th:action="@{/books/report/2}">
+            <input th:class="buttonNavi" type="submit" value="Книги на руках">
+        </form>
+        <form th:method="GET" th:action="@{/books/report/3}">
+            <input th:class="buttonNavi" type="submit" value="Забронированные">
+        </form>
+        <form th:method="GET" th:action="@{/books/report/1}">
+            <input th:class="buttonNavi" type="submit" value="Свободные книги">
+        </form>
+    </div>
+
+    <div th:class="blockThree">
+
+        <!--/*@thymesVar id="report" type="java.util.Map"*/-->
+        <div th:each="key : ${report.keySet()}">
+            <span th:text="${key}">Key</span>
+            <span th:text="${report.get(key)}">Value</span>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
