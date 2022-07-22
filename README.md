@@ -65,7 +65,7 @@
 |                ![](readme-screen/user_info_from_librarian.jpg)                |
 |      13. Информация о пользователе и его книгах. Вид из кабинета админа:      |
 |                  ![](readme-screen/user_info_from_admin.jpg)                  |
-|         14. Динамическое отображение страниц используется Thymeleaf:          |
+|       14. Для динамического отображение страниц используется Thymeleaf:       |
 |                       ![](readme-screen/thymeleaf.jpg)                        |
 |   15. Обновление брони на книгах и возможности бронировать у пользователей:   |
 |             ![](readme-screen/update_reservation_and_booking.jpg)             |
