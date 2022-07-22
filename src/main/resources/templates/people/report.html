@@ -1,47 +1,51 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Отчёт по пользователям</title>
-  <link rel="stylesheet" th:href="@{/css/blocks.css}" type="text/css"/>
-  <link rel="stylesheet" th:href="@{/css/buttons.css}" type="text/css"/>
-  <link rel="stylesheet" th:href="@{/css/page-titles.css}" type="text/css"/>
+    <meta charset="UTF-8">
+    <title>Отчёт по пользователям</title>
+    <link rel="stylesheet" th:href="@{/css/blocks.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/buttons.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/page-titles.css}" type="text/css"/>
 </head>
 <body>
 
 <div th:class="blockMain">
 
-  <div th:class="blockOne">
-    <form th:action="@{/logout}" th:method="POST">
-      <input th:class="buttonExit" type="submit" value="Выход">
-    </form>
+    <div th:class="blockOne">
+        <form th:action="@{/logout}" th:method="POST">
+            <input th:class="buttonExit" type="submit" value="Выход">
+        </form>
 
-    <form th:method="GET" th:action="@{/people}">
-      <input th:class="buttonBackToPeople" type="submit" value="Вернуться к списку пользователей">
-    </form>
-  </div>
-
-  <div th:class="blockTwo">
-    <form th:method="GET" th:action="@{/people/report/1}">
-      <input th:class="buttonNavi" type="submit" value="Пользователи с книгами на руках">
-    </form>
-    <form th:method="GET" th:action="@{/people/report/2}">
-      <input th:class="buttonNavi" type="submit" value="Пользователи забронировавшие книги на сайте">
-    </form>
-    <form th:method="GET" th:action="@{/people/report/3}">
-      <input th:class="buttonNavi" type="submit" value="Потеряли возможность бронировать книги на сайте">
-    </form>
-  </div>
-
-  <div th:class="blockThree">
-
-    <!--/*@thymesVar id="report" type="java.util.Map"*/-->
-    <div th:each="key : ${report.keySet()}">
-      <span th:text="${key}">Value</span>
-      <span th:text="${report.get(key)}">Value</span>
+        <form th:method="GET" th:action="@{/people}">
+            <input th:class="buttonBackToPeople" type="submit" value="Вернуться к списку пользователей">
+        </form>
     </div>
 
-  </div>
+    <div th:class="blockTwo">
+        <form th:method="GET" th:action="@{/people/report/1}">
+            <input th:class="buttonNavi" type="submit" value="Пользователи с книгами на руках">
+        </form>
+        <form th:method="GET" th:action="@{/people/report/2}">
+            <input th:class="buttonNavi" type="submit" value="Пользователи забронировавшие книги на сайте">
+        </form>
+        <form th:method="GET" th:action="@{/people/report/3}">
+            <input th:class="buttonNavi" type="submit" value="Потеряли возможность бронировать книги на сайте">
+        </form>
+    </div>
+
+    <div th:class="blockThree">
+
+        <!--/*@thymesVar id="report" type="java.util.Map"*/-->
+        <div th:each="key : ${report.keySet()}">
+            <span th:text="${key}">Value</span>
+            <span th:text="${report.get(key)}">Value</span>
+        </div>
+
+    </div>
+
+    <div th:class="footer">
+        <a th:href="@{https://github.com/itbatia/Library}" th:target="_blank">Репозиторий с исходным кодом</a>
+    </div>
 
 </div>
 

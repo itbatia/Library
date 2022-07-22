@@ -72,3 +72,8 @@ tr {
     border-radius: 4px;
     border-color: #32415e;
 }
+
+.footer{
+    font-size: 7pt;
+    float: right;
+}
