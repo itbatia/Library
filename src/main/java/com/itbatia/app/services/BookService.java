@@ -1,6 +1,7 @@
 package com.itbatia.app.services;
 
 import com.itbatia.app.models.Book;
+import com.itbatia.app.models.Genre;
 import com.itbatia.app.models.Person;
 import com.itbatia.app.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,14 +35,22 @@ public class BookService {
             return bookRepository.findAll();
         } else if (!sorter.equals("no") && (page == null || size == null || page < 0 || size < 1)) {
             //Только сортировка книг:
+            if (sorter.equals("genre"))
+                return sortByGenre(bookRepository.findAll());
             return bookRepository.findAll(Sort.by(sorter));
         } else if (sorter.equals("no") && (page != null && size != null && page >= 0 && size > 0)) {
             //Только пагинация книг:
             return bookRepository.findAll(PageRequest.of(page - 1, size)).getContent();
         } else if (!sorter.equals("no")) {
             //Пагинация + сортировка:
+            if (sorter.equals("genre"))
+                sortByGenre(bookRepository.findAll(PageRequest.of(page - 1, size)).getContent());
             return bookRepository.findAll(PageRequest.of(page - 1, size, Sort.by(sorter))).getContent();
         } else return bookRepository.findAll();
+    }
+
+    private List<Book> sortByGenre(List<Book> books) {
+        return books.stream().sorted(Comparator.comparing(book -> book.getGenre().getGenreTitle())).toList();
     }
 
     //Для валидатора
@@ -135,7 +144,7 @@ public class BookService {
     public List<Book> findByTitleStartingWith(String query) {
         if (!query.isEmpty()) {
             List<String> wordsOfQuery = queryEditing(query);
-            if (wordsOfQuery.size()==1) {
+            if (wordsOfQuery.size() == 1) {
                 return bookRepository.findAllByTitleStartingWith(wordsOfQuery.get(0));
             } else {
                 List<Book> resultList = bookRepository.findAllByTitleStartingWith(wordsOfQuery.get(0));
@@ -150,7 +159,7 @@ public class BookService {
     public List<Book> findByAuthorStartingWith(String query) {
         if (!query.isEmpty()) {
             List<String> wordsOfQuery = queryEditing(query);
-            if (wordsOfQuery.size()==1) {
+            if (wordsOfQuery.size() == 1) {
                 return bookRepository.findAllByAuthorStartingWith(wordsOfQuery.get(0));
             } else {
                 List<Book> resultList = bookRepository.findAllByAuthorStartingWith(wordsOfQuery.get(0));
@@ -214,7 +223,7 @@ public class BookService {
         return Collections.emptyList();
     }
 
-    public List<Book> freeBooks(){
+    public List<Book> freeBooks() {
         return bookRepository.findAllByOwnerNull();
     }
 }
