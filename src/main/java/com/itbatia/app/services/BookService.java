@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -141,59 +140,17 @@ public class BookService {
     }
 
     //Поиск книг по названию:
-    public List<Book> findByTitleStartingWith(String query) {
-        if (!query.isEmpty()) {
-            List<String> wordsOfQuery = getWordsOfQuery(query);
-            if (wordsOfQuery.size() == 1) {
-                return findBooksByTitleInternal(wordsOfQuery.get(0));
-            } else {
-                List<Book> resultList = findBooksByTitleInternal(wordsOfQuery.get(0));
-                resultList.addAll(findBooksByTitleInternal(wordsOfQuery.get(1)));
-                return resultList.stream().distinct().toList();
-            }
-        }
+    public List<Book> findByTitleContainingQuery(String query) {
+        if (!query.isEmpty())
+            return bookRepository.findAllByTitleContainingIgnoreCase(query);
         return Collections.emptyList();
     }
 
-    //Поиск книги по имени автора:
-    public List<Book> findByAuthorStartingWith(String query) {
-        if (!query.isEmpty()) {
-            List<String> wordsOfQuery = getWordsOfQuery(query);
-            if (wordsOfQuery.size() == 1) {
-                return findBooksByAuthorInternal(wordsOfQuery.get(0));
-            } else {
-                List<Book> resultList = findBooksByAuthorInternal(wordsOfQuery.get(0));
-                resultList.addAll(findBooksByAuthorInternal(wordsOfQuery.get(1)));
-                return resultList.stream().distinct().toList();
-            }
-        }
+    //Поиск книги по автору:
+    public List<Book> findByAuthorContainingQuery(String query) {
+        if (!query.isEmpty())
+            return bookRepository.findAllByAuthorContainingIgnoreCase(query);
         return Collections.emptyList();
-    }
-
-    private List<String> getWordsOfQuery(String userQuery) {
-        List<String> wordsOfQuery = new ArrayList<>();
-        String query = userQuery.strip();
-
-        if (query.contains(" ")) {
-            String[] array = query.split(" ");
-            wordsOfQuery.add(array[0]);
-            wordsOfQuery.add(array[1]);
-        } else {
-            wordsOfQuery.add(query);
-        }
-        return wordsOfQuery;
-    }
-
-    private List<Book> findBooksByTitleInternal(String queryWord) {
-        return bookRepository.findAll().stream()
-                .filter(book -> book.getTitle().toLowerCase().contains(queryWord.toLowerCase()))
-                .collect(Collectors.toList());
-    }
-
-    private List<Book> findBooksByAuthorInternal(String queryWord) {
-        return bookRepository.findAll().stream()
-                .filter(book -> book.getAuthor().toUpperCase().contains(queryWord.toUpperCase()))
-                .collect(Collectors.toList());
     }
 
     //Для отчёта
@@ -224,7 +181,7 @@ public class BookService {
         } else return Collections.emptyMap();
     }
 
-    public List<Book> partBooksForReport(int number) {
+    public List<Book> getBooksForReport(int number) {
         if (number == 1) return bookRepository.findAllByOwnerNull();
         if (number == 2) return bookRepository.findAllByTakenAtNotNull();
         if (number == 3) return bookRepository.findAllByReservedUntilNotNull();

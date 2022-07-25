@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/books")
@@ -160,9 +159,9 @@ public class BookController {
                              @RequestParam("searchBy") String searchBy) {
         List<Book> books = new ArrayList<>();
         if (searchBy.equals("title")) {
-            books = bookService.findByTitleStartingWith(query);
+            books = bookService.findByTitleContainingQuery(query);
         } else if (searchBy.equals("author")) {
-            books = bookService.findByAuthorStartingWith(query);
+            books = bookService.findByAuthorContainingQuery(query);
         }
         model.addAttribute("books", books.stream().map(this::convertToBookDTO).toList());
         model.addAttribute("amount", books.size());
@@ -179,7 +178,7 @@ public class BookController {
 
     @GetMapping("/report/{number}")
     public String getPartBooksForReport(@PathVariable("number") Integer number, Model model) {
-        model.addAttribute("books", bookService.partBooksForReport(number)
+        model.addAttribute("books", bookService.getBooksForReport(number)
                 .stream().map(this::convertToBookDTO).toList());
         model.addAttribute("number", number);
         return "books/books_for_report";
@@ -187,7 +186,8 @@ public class BookController {
 
     @GetMapping("/free_books")
     public String getFreeBooks(Model model) {
-        model.addAttribute("books", bookService.freeBooks().stream().map(this::convertToBookDTO).toList());
+        model.addAttribute("books", bookService.freeBooks()
+                .stream().map(this::convertToBookDTO).toList());
         return "books/free_books";
     }
 

@@ -124,9 +124,9 @@ public class PersonService {
     }
 
     //Поиск пользователей по первой букве(ам) в имени:
-    public List<Person> findByFullNameStartingWith(String query) {
+    public List<Person> findByFullNameContainsQuery(String query) {
         if (!query.isEmpty())
-            return personRepository.findByFullNameStartingWith(query);
+            return personRepository.findAllByFullNameContainsIgnoreCase(query);
         return Collections.emptyList();
     }
 

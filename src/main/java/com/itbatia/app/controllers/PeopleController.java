@@ -85,7 +85,7 @@ public class PeopleController {
     @PostMapping("/search")
     public String makeSearch(@RequestParam("query") String query, Model model) {
 
-        model.addAttribute("people", personService.findByFullNameStartingWith(query)
+        model.addAttribute("people", personService.findByFullNameContainsQuery(query)
                 .stream().map(personMapper::convertToPersonDTO).toList());
 
         return "people/search";

@@ -26,12 +26,6 @@
     <div th:class="blockTwo">
         <div th:class="select">
 
-            <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') or hasRole(''ROLE_LIBRARIAN'')')}">
-                <form th:method="GET" th:action="@{/books/new}">
-                    <input th:class="buttonNavi" type="submit" value="Добавить новую книгу">
-                </form>
-            </div>
-
             <form th:method="GET" th:action="@{/books/search}">
                 <input th:class="buttonNavi" type="submit" value="Поиск книг">
             </form>
@@ -54,7 +48,7 @@
                 <label for="page">2. Показать страницу №: </label>
                 <input id="page" name="page" type="number" min="1" max="100">
                 <br/> <br/>
-                <input th:class="buttonNavi" type="submit" value="Искать">
+                <input th:class="buttonNavi" type="submit" value=" Искать по запросам: или 1 или 2+2 или 1+2+2">
                 <hr/>
 
             </form>
@@ -66,14 +60,20 @@
             </div>
 
             <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') or hasRole(''ROLE_LIBRARIAN'')')}">
-                <form th:method="GET" th:action="@{/people}">
-                    <input th:class="buttonNavi" type="submit" value="Перейти к списку пользователей">
+                <form th:method="GET" th:action="@{/books/new}">
+                    <input th:class="buttonNavi" type="submit" value="Добавить новую книгу">
                 </form>
             </div>
 
             <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') or hasRole(''ROLE_LIBRARIAN'')')}">
                 <form th:method="GET" th:action="@{/books/report}">
                     <input th:class="buttonNavi" type="submit" value="Отчёт по книгам">
+                </form>
+            </div>
+
+            <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') or hasRole(''ROLE_LIBRARIAN'')')}">
+                <form th:method="GET" th:action="@{/people}">
+                    <input th:class="buttonNavi" type="submit" value="Перейти к списку пользователей">
                 </form>
             </div>
 
