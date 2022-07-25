@@ -12,10 +12,6 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
 
     Optional<Book> findAllByTitleAndAuthor(String title, String author);
 
-    List<Book> findAllByTitleStartingWith(String query);
-
-    List<Book> findAllByAuthorStartingWith(String query);
-
     List<Book> findAllByTakenAtNotNull();
 
     List<Book> findAllByReservedUntilNotNull();

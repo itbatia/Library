@@ -1,7 +1,6 @@
 package com.itbatia.app.services;
 
 import com.itbatia.app.models.Book;
-import com.itbatia.app.models.Genre;
 import com.itbatia.app.models.Person;
 import com.itbatia.app.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -140,52 +140,60 @@ public class BookService {
         });
     }
 
-    //Поиск книги по первой букве(ам) в названии:
+    //Поиск книг по названию:
     public List<Book> findByTitleStartingWith(String query) {
         if (!query.isEmpty()) {
-            List<String> wordsOfQuery = queryEditing(query);
+            List<String> wordsOfQuery = getWordsOfQuery(query);
             if (wordsOfQuery.size() == 1) {
-                return bookRepository.findAllByTitleStartingWith(wordsOfQuery.get(0));
+                return findBooksByTitleInternal(wordsOfQuery.get(0));
             } else {
-                List<Book> resultList = bookRepository.findAllByTitleStartingWith(wordsOfQuery.get(0));
-                resultList.addAll(bookRepository.findAllByTitleStartingWith(wordsOfQuery.get(1)));
+                List<Book> resultList = findBooksByTitleInternal(wordsOfQuery.get(0));
+                resultList.addAll(findBooksByTitleInternal(wordsOfQuery.get(1)));
                 return resultList.stream().distinct().toList();
             }
         }
         return Collections.emptyList();
     }
 
-    //Поиск книги по первой букве(ам) имени автора:
+    //Поиск книги по имени автора:
     public List<Book> findByAuthorStartingWith(String query) {
         if (!query.isEmpty()) {
-            List<String> wordsOfQuery = queryEditing(query);
+            List<String> wordsOfQuery = getWordsOfQuery(query);
             if (wordsOfQuery.size() == 1) {
-                return bookRepository.findAllByAuthorStartingWith(wordsOfQuery.get(0));
+                return findBooksByAuthorInternal(wordsOfQuery.get(0));
             } else {
-                List<Book> resultList = bookRepository.findAllByAuthorStartingWith(wordsOfQuery.get(0));
-                resultList.addAll(bookRepository.findAllByAuthorStartingWith(wordsOfQuery.get(1)));
+                List<Book> resultList = findBooksByAuthorInternal(wordsOfQuery.get(0));
+                resultList.addAll(findBooksByAuthorInternal(wordsOfQuery.get(1)));
                 return resultList.stream().distinct().toList();
             }
         }
         return Collections.emptyList();
     }
 
-    private List<String> queryEditing(String userQuery) {
+    private List<String> getWordsOfQuery(String userQuery) {
         List<String> wordsOfQuery = new ArrayList<>();
         String query = userQuery.strip();
 
         if (query.contains(" ")) {
             String[] array = query.split(" ");
-            wordsOfQuery.add(queryEditingInternal(array[0]));
-            wordsOfQuery.add(queryEditingInternal(array[1]));
+            wordsOfQuery.add(array[0]);
+            wordsOfQuery.add(array[1]);
         } else {
-            wordsOfQuery.add(queryEditingInternal(query));
+            wordsOfQuery.add(query);
         }
         return wordsOfQuery;
     }
 
-    private String queryEditingInternal(String query) {
-        return query.substring(0, 1).toUpperCase().concat(query.substring(1));
+    private List<Book> findBooksByTitleInternal(String queryWord) {
+        return bookRepository.findAll().stream()
+                .filter(book -> book.getTitle().toLowerCase().contains(queryWord.toLowerCase()))
+                .collect(Collectors.toList());
+    }
+
+    private List<Book> findBooksByAuthorInternal(String queryWord) {
+        return bookRepository.findAll().stream()
+                .filter(book -> book.getAuthor().toUpperCase().contains(queryWord.toUpperCase()))
+                .collect(Collectors.toList());
     }
 
     //Для отчёта
